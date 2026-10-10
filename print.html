@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Le Malaga · Guide imprimable</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Paper layout (US Letter). Built from content.js, so it always matches the website. Open print.html?lang=fr|en|es */
+:root{--ink:#15252a;--muted:#56686c;--line:#cfd8d7;--lake:#1d5a63;--lake-soft:#e3eeee;--maple:#b9471f;--maple-soft:#f7e6dc;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif}
+@page{size:Letter;margin:14mm 14mm 16mm}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:var(--body);font-size:10pt;line-height:1.38}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
+p{margin:0}
+.page{break-after:page}
+.screen-wrap{max-width:8.5in;margin:0 auto;padding:16px}
+@media print{.screen-wrap{padding:0}}
+
+/* cover */
+.cover{display:grid;gap:11px}
+.places b{font-size:10pt}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.strip img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px}
+.cover img.hero{width:100%;height:2.6in;object-fit:cover;border-radius:10px}
+.cover .eyebrow{font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.cover h1{font-size:40pt;font-weight:800;letter-spacing:-.02em}
+.cover h1 small{display:block;font-size:14pt;font-weight:500;color:var(--lake);letter-spacing:0;margin-top:4px}
+.welcome{background:var(--lake-soft);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.welcome .sig{font-family:var(--display);font-weight:700;color:var(--lake)}
+.fill{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.fill div{border:1.5px solid var(--ink);border-radius:8px;padding:8px 10px 26px;font-size:8.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.web{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.web img{width:1.05in;height:1.05in}
+.web b{font-family:var(--display);display:block;font-size:11pt}
+.web span{font-size:9pt;color:var(--muted)}
+
+/* sections */
+h2.sec{font-size:18pt;font-weight:800;margin:0 0 8px;padding-bottom:4px;border-bottom:2px solid var(--lake);color:var(--ink)}
+.card{break-inside:avoid;display:grid;grid-template-columns:1.2in minmax(0,1fr);gap:12px;padding:8px 0 9px;border-bottom:1px solid var(--line)}
+.card .ph{display:grid;gap:6px;align-content:start}
+.card .ph img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px}
+.card h3{font-size:14pt;font-weight:800}
+.card h3 small{font-family:var(--body);font-size:9pt;font-weight:400;color:var(--muted);margin-left:6px}
+.card h4{font-family:var(--display);font-size:10.5pt;margin:6px 0 2px;color:var(--lake)}
+.card .qr{float:right;width:.7in;height:.7in;margin:0 0 4px 8px}
+ol,ul{margin:0;padding-left:1.15em}
+li{margin:1px 0}
+.tip{background:var(--maple-soft);border-radius:6px;padding:6px 8px;margin:6px 0 2px;font-size:9.5pt}
+.tip b{color:var(--maple)}
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.note{break-inside:avoid;border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.note.warn{background:var(--maple-soft);border-color:transparent}
+.note.warn h3{color:var(--maple)}
+.note.eco{background:var(--lake-soft);border-color:transparent}
+.note h3{font-size:11.5pt;margin-bottom:4px}
+.check li{list-style:none;margin-left:-1.15em;display:flex;gap:8px;align-items:flex-start;padding:2px 0;font-size:10.5pt}
+.check li::before{content:"";flex:none;width:13px;height:13px;border:1.5px solid var(--ink);border-radius:3px;margin-top:3px}
+.urg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.urg div{border:1px solid var(--line);border-radius:8px;padding:5px 9px;font-size:9.5pt;break-inside:avoid}
+.urg div.big{background:var(--maple-soft);border-color:transparent}
+.urg b{display:block;font-family:var(--display);font-size:13pt;color:var(--maple)}
+.places{columns:3;column-gap:14px}
+.places div{break-inside:avoid;margin-bottom:3px}
+.places .k{font-size:7.5pt;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--maple)}
+.places b{font-family:var(--display);display:block}
+.places span{font-size:8.5pt;line-height:1.3;color:var(--muted)}
+.block{margin-top:10px}
+footer{margin-top:8px;text-align:center;color:var(--muted);font-size:9pt}
+</style>
+</head>
+<body>
+<div class="screen-wrap" id="root"></div>
+<script src="content.js"></script>
+<script>
+const LANGS=["fr","en","es"];
+let L=new URLSearchParams(location.search).get("lang");if(!LANGS.includes(L))L="fr";
+const t=T[L],pr=t.pr,BASE="https://davecastonguay.github.io/le-malaga/";
+const IMG={door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
+const ORDER=["door","fire","stove","patio","win","heat"];
+const strip=h=>h.replace(/<\/?em>/g,"");
+const ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+const ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join("")}</ol>`;
+document.documentElement.lang=L;document.title="Le Malaga · "+pr.printed;
+
+function card(k){
+  const c=t.cards[k];let h=`<div class="card"><div class="ph">${IMG[k].map(s=>`<img src="${s}" alt="">`).join("")}</div><div>`;
+  h+=`<img class="qr" src="img/qr/${k}.svg" alt=""><h3>${c.t}<small>${c.s}</small></h3>`;
+  if(c.tip)h+=`<p class="tip">${c.tip}</p>`;
+  c.blocks.forEach(b=>{
+    h+=`<h4>${b.h}</h4>`;
+    if(b.demo==="fire")h+=ol(c.fire);
+    if(b.demo==="stove")h+=ol(c.stove);
+    if(b.demo==="win")h+=ul(c.win.map(([a,d])=>`<b>${a}.</b> ${d}`));
+    if(b.demo==="patio")h+=ul(c.patio.map(([a,d])=>`<b>${a}.</b> ${d}`));
+    if(b.steps)h+=ol(b.steps);
+  });
+  return h+`</div></div>`;
+}
+const note=(cls,hk,lk)=>`<div class="note ${cls}">${hk?`<h3>${t[hk]}</h3>`:""}${ul(t[lk])}</div>`;
+
+let H=`<section class="page cover">
+  <img class="hero" src="img/hero.jpg" alt="">
+  <span class="eyebrow">${t.where}</span>
+  <h1>${t.brand}<small>${strip(t.hello)}</small></h1>
+  <div class="welcome"><p>${t.welP}</p><p class="sig">${t.welSig}</p></div>
+  <div class="fill"><div>${pr.wifi}</div><div>${pr.pass}</div><div>${pr.phone}</div></div>
+  <div class="strip"><img src="img/salon.jpg" alt=""><img src="img/kayaks.jpg" alt=""><img src="img/maison-lac.jpg" alt=""></div>
+  <div class="web"><img src="img/qr/site.svg" alt=""><div><b>${pr.web}</b><span>${BASE.replace("https://","")} · ${pr.scan}</span></div></div>
+</section>
+<section><h2 class="sec">${t.howH}</h2>${ORDER.map(card).join("")}</section>
+<section class="page" style="margin-top:14px"><h2 class="sec">${t.lakeH} · ${t.cleanH}</h2>
+  <div class="notes">${note("eco","waterH","water")}${note("","pantryH","pantry")}${note("warn","pingH","ping")}${note("eco","vestH","vest")}${note("warn","windH","wind")}${note("eco","ecoH","eco")}</div>
+  <div class="block"><h2 class="sec">${t.cleanEye}</h2>${note("","","clean")}</div>
+</section>
+<section><div style="break-inside:avoid"><h2 class="sec">${t.leaveH}</h2><ul class="check">${t.leave.map(([,x])=>`<li>${x}</li>`).join("")}</ul></div>
+  <div class="block"><h2 class="sec">${t.urgH}</h2>
+  <div class="urg">${t.urg.map(([n,d,,big])=>`<div class="${big?"big":""}"><b>${n}</b>${d.replace(/ ?(Voir sur la carte|See on the map|Ver en el mapa) →/,"")}</div>`).join("")}</div></div>
+  <div class="block"><h2 class="sec">${t.soonH}</h2>
+  <h3 style="font-size:12pt;margin:4px 0 6px">${t.actH}</h3><div class="places">${t.acts.map(([k,n,d])=>`<div><span class="k">${k}</span><b>${n}</b><span>${d}</span></div>`).join("")}</div>
+  <h3 style="font-size:12pt;margin:10px 0 6px">${t.foodH}</h3><div class="places">${t.food.map(([k,n,d])=>`<div><span class="k">${k}</span><b>${n}</b><span>${d}</span></div>`).join("")}</div>
+  <p style="font-size:8.5pt;color:var(--muted);margin-top:4px">${t.aroundNote} · <b>${t.foot}</b></p></div>
+</section>`;
+document.getElementById("root").innerHTML=H;
+</script>
+</body>
+</html>
