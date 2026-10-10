@@ -21,7 +21,7 @@ p{margin:0}
 
 /* cover */
 .cover{display:grid;gap:11px}
-.places b{font-size:10pt}
+.places b{font-size:9.5pt}
 .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .strip img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px}
 .cover img.hero{width:100%;height:2.6in;object-fit:cover;border-radius:10px}
@@ -59,7 +59,7 @@ li{margin:1px 0}
 .note a{color:var(--ink);text-decoration:none;font-weight:700}
 .check li{list-style:none;margin-left:-1.15em;display:flex;gap:8px;align-items:flex-start;padding:2px 0;font-size:10.5pt}
 .check li::before{content:"";flex:none;width:13px;height:13px;border:1.5px solid var(--ink);border-radius:3px;margin-top:3px}
-.urg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.urg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
 .urg div{border:1px solid var(--line);border-radius:8px;padding:5px 9px;font-size:9.5pt;break-inside:avoid}
 .urg div.big{background:var(--maple-soft);border-color:transparent}
 .urg b{display:block;font-family:var(--display);font-size:13pt;color:var(--maple)}
@@ -67,7 +67,7 @@ li{margin:1px 0}
 .places div{break-inside:avoid;margin-bottom:3px}
 .places .k{font-size:7.5pt;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--maple)}
 .places b{font-family:var(--display);display:block}
-.places span{font-size:8.5pt;line-height:1.3;color:var(--muted)}
+.places span{font-size:8pt;line-height:1.25;color:var(--muted)}
 .block{margin-top:10px}
 footer{margin-top:8px;text-align:center;color:var(--muted);font-size:9pt}
 </style>
@@ -90,6 +90,7 @@ function card(k){
   const c=t.cards[k];let h=`<div class="card"><div class="ph">${IMG[k].map(s=>`<img src="${s}" alt="">`).join("")}</div><div>`;
   h+=`<img class="qr" src="img/qr/${k}.svg" alt=""><h3>${c.t}<small>${c.s}</small></h3>`;
   if(c.tip)h+=`<p class="tip">${c.tip}</p>`;
+  if(c.warn)h+=`<p class="tip warn">${c.warn}</p>`;
   c.blocks.forEach(b=>{
     h+=`<h4>${b.h}</h4>`;
     if(b.demo==="fire")h+=ol(c.fire);
@@ -112,7 +113,7 @@ let H=`<section class="page cover">
   <div class="web"><img src="img/qr/site.svg" alt=""><div><b>${pr.web}</b><span>${BASE.replace("https://","")} · ${pr.scan}</span></div></div>
 </section>
 <section><h2 class="sec">${t.howH}</h2>${ORDER.map(card).join("")}</section>
-<section class="page" style="margin-top:14px"><h2 class="sec">${t.lakeH} · ${t.cleanH}</h2>
+<section style="margin-top:14px"><h2 class="sec">${t.lakeH} · ${t.cleanH}</h2>
   <div class="notes">${note("eco","waterH","water")}${note("","pantryH","pantry")}${note("warn","pingH","ping")}${note("eco","vestH","vest")}${note("eco","ecoH","eco")}</div>
   <div class="block" style="break-inside:avoid"><h2 class="sec">${t.outH}</h2><div class="notes">${note("warn","fireOutH","fireOut")}${note("","bbqH","bbq")}${note("eco","wasteH","waste")}</div></div>
   <div class="block"><h2 class="sec">${t.cleanEye}</h2>${note("","","clean")}</div>
