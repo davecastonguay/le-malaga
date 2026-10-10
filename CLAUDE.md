@@ -23,6 +23,7 @@ A one-page, mobile-first guide for home-exchange guests staying at Dave's lake h
 - `print.html?lang=fr|en|es` – printable guide (US Letter) built from `content.js`. `qr.html` – sheet of 10 QR stickers.
 - `print/` – the PDFs linked from the site. **Rebuild them after any text change:** `python3 tools/build_print.py` (needs Playwright + Chromium), then commit them.
 - `img/qr/` – QR codes pointing to `https://davecastonguay.github.io/le-malaga/#<card>`. Rebuild with `tools/make_qr.sh` (needs pdflatex + pdftocairo) only if the site address changes.
+- Page order: welcome → photo tour → `#maison` (cards) → `#savoir` → `#lac` → `#dehors` → `#depart` (cleaning + checklist `#partir`) → `#magog` → `#urgences`. The sticky `nav` chips (in content.js) jump to these.
 - Deep links: `#door`, `#fire`, `#stove`, `#patio`, `#win`, `#heat`, `#vinyl` open that card; `#partir`, `#urgences` scroll to the section; `?lang=en` forces a language.
 - `sw.js` – offline support. **Bump `VERSION` on every change**, and add any new image to `ASSETS`.
 - `manifest.webmanifest`, `img/icon-*.png` – lets guests add the guide to their home screen.

@@ -30,7 +30,7 @@ html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{dis
   --lake:#7cc3c8; --lake-soft:#1b3439; --maple:#ec8a5f; --maple-soft:#3a2219; --sky:#1a2d33;
   --hill1:#244a3c; --hill2:#8f4f22; --hill3:#6e2b18; --water:#2a5c64; color-scheme:dark}
 *{box-sizing:border-box}
-[id]{scroll-margin-top:72px}
+[id]{scroll-margin-top:112px}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5}
 .wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
@@ -43,7 +43,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* top bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
-.bar .in{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.bar .in{max-width:760px;margin:0 auto;padding:10px 16px 6px;display:flex;align-items:center;gap:12px}
+.jump{max-width:760px;margin:0 auto;padding:0 16px 8px;display:flex;gap:8px;align-items:center}
+.jl{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.jl::-webkit-scrollbar{display:none}
+.jump a{flex:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:.86rem;font-weight:700}
+.jump a.sos{background:var(--maple);border-color:var(--maple);color:var(--paper)}
+.sub-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:6px}
+.sub-head h3{font-size:1.2rem}
 .brand{font-family:var(--display);font-weight:800;font-size:1.05rem;flex:1;min-width:0}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--card)}
 .lang button{border:0;background:none;padding:5px 12px;border-radius:999px;font-weight:700;font-size:.85rem;color:var(--muted)}
@@ -79,6 +86,11 @@ section{margin-top:40px;display:grid;gap:14px}
 @media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .fiche{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:0;text-align:left;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s}
 .fiche:hover{transform:translateY(-2px)}
+.grid .fiche:last-child:nth-child(odd){grid-column:1/-1;flex-direction:row}
+.grid .fiche:last-child:nth-child(odd) .ph{width:45%;aspect-ratio:auto;min-height:120px}
+.grid .fiche:last-child:nth-child(odd) .t{align-content:center}
+@media(min-width:620px){.grid .fiche:last-child:nth-child(odd){grid-column:auto;flex-direction:column}.grid .fiche:last-child:nth-child(odd) .ph{width:100%;aspect-ratio:4/3}
+.grid .fiche:last-child:nth-child(3n+1){grid-column:1/-1;flex-direction:row}.grid .fiche:last-child:nth-child(3n+1) .ph{width:40%;aspect-ratio:auto;min-height:150px}}
 .fiche .ph{aspect-ratio:4/3;width:100%;background:var(--lake-soft) center/cover no-repeat}
 .fiche .t{padding:10px 12px 12px;display:grid;gap:2px}
 .fiche .t b{font-family:var(--display);font-size:1.02rem}
@@ -99,7 +111,8 @@ ul.pts{margin:0;padding-left:1.1em;display:grid;gap:4px}
 .check input:checked + span{color:var(--muted);text-decoration:line-through}
 .progress{font-size:.9rem;color:var(--muted)}
 .places{display:grid;gap:10px}
-@media(min-width:620px){.places{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.places{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:0 16px 6px;scroll-padding-inline:16px}
+.places .place{flex:0 0 min(78%,300px);scroll-snap-align:start;align-content:start}
 .place{display:grid;gap:4px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:inherit;text-decoration:none}
 .place:hover{border-color:var(--lake)}
 .place b{font-family:var(--display);font-size:1.05rem}
@@ -206,7 +219,7 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
   <div class="lang" role="group" aria-label="Langue / Language">
     <button id="fr" aria-pressed="true">FR</button><button id="en" aria-pressed="false">EN</button><button id="es" aria-pressed="false">ES</button>
   </div>
-</div></div>
+</div><nav class="jump" id="jump"><div class="jl" id="jl"></div><a class="sos" id="sos" href="#urgences"></a></nav></div>
 
 <div class="wrap">
   <div class="hero"><video class="hero-img amb" src="img/terrasse.mp4" poster="img/terrasse-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video><span class="hero-cap" data-t="heroCap"></span></div>
@@ -229,19 +242,22 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
     <div class="gallery" id="gallery"></div>
   </section>
 
-  <section>
+  <section id="maison">
     <div class="sec-head"><span class="eyebrow" data-t="howEye"></span><h2 data-t="howH"></h2></div>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="savoir">
+    <div class="sec-head"><span class="eyebrow" data-t="savoirEye"></span><h2 data-t="savoirH"></h2></div>
     <div class="note eco"><h3 data-t="waterH"></h3><ul class="pts" data-l="water"></ul></div>
     <div class="note"><h3 data-t="pantryH"></h3><ul class="pts" data-l="pantry"></ul></div>
     <div class="note warn with-img"><img src="img/pingpong.jpg" alt=""><div><h3 data-t="pingH"></h3><ul class="pts" data-l="ping"></ul></div></div>
   </section>
 
-  <section>
+  <section id="lac">
     <div class="sec-head"><span class="eyebrow" data-t="lakeEye"></span><h2 data-t="lakeH"></h2></div>
     <video class="wide amb" src="img/quai.mp4" poster="img/quai-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
     <div class="note eco"><h3 data-t="vestH"></h3><ul class="pts" data-l="vest"></ul></div>
-    <div class="note warn"><h3 data-t="windH"></h3><ul class="pts" data-l="wind"></ul></div>
   </section>
 
   <section id="dehors">
@@ -251,18 +267,15 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
     <div class="note eco"><h3 data-t="wasteH"></h3><ul class="pts" data-l="waste"></ul></div>
   </section>
 
-  <section>
+  <section id="depart">
     <div class="sec-head"><span class="eyebrow" data-t="cleanEye"></span><h2 data-t="cleanH"></h2></div>
-    <div class="note"><ul class="pts" data-l="clean"></ul></div>
+    <div class="note"><h3 data-t="cleanSub"></h3><ul class="pts" data-l="clean"></ul></div>
     <div class="note eco"><h3 data-t="ecoH"></h3><ul class="pts" data-l="eco"></ul></div>
-  </section>
-
-  <section>
-    <div class="sec-head" id="partir"><span class="eyebrow" data-t="leaveEye"></span><h2 data-t="leaveH"></h2><p class="progress" id="prog"></p></div>
+    <div class="sub-head" id="partir"><h3 data-t="leaveH"></h3><p class="progress" id="prog"></p></div>
     <div class="check" id="check"></div>
   </section>
 
-  <section>
+  <section id="magog">
     <div class="sec-head"><span class="eyebrow" data-t="soonEye"></span><h2 data-t="soonH"></h2></div>
     <p class="progress" data-t="aroundNote"></p>
     <h3 data-t="actH"></h3>
@@ -296,6 +309,7 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
 const VID={vinyl:[["img/vinyle.mp4","img/vinyle-poster.jpg"]],fire:[["img/foyer-ouvrir.mp4","img/foyer-ouvrir-poster.jpg"],["img/foyer-pendant.mp4","img/foyer-pendant-poster.jpg"]]};
 const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const IMG={vinyl:["img/vinyle-levier.jpg","img/vinyle-son.jpg"],door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
+const TILE={vinyl:"img/vinyle-levier.jpg"};
 const ORDER=["door","fire","stove","patio","win","heat","vinyl"];
 const LANGS=["fr","en","es"];let L=(navigator.language||"fr").slice(0,2);try{L=localStorage.getItem("lang")||L}catch(e){}
 if(!LANGS.includes(L))L="fr";
@@ -308,9 +322,10 @@ function render(){
   const t=T[L];document.documentElement.lang=L;
   document.querySelectorAll("[data-t]").forEach(el=>{const v=t[el.dataset.t];if(typeof v==="string")el.innerHTML=v});
   document.querySelectorAll("[data-l]").forEach(el=>el.innerHTML=t[el.dataset.l].map(x=>`<li>${x}</li>`).join(""));
+  $("#jump").setAttribute("aria-label",t.navLabel);$("#jl").innerHTML=t.nav.filter(([id])=>id!=="urgences").map(([id,x])=>`<a href="#${id}">${x}</a>`).join("");$("#sos").textContent=t.nav.find(([id])=>id==="urgences")[1];
   $("#facts").innerHTML=t.facts.map(f=>`<span>${f}</span>`).join("");
   $("#gallery").innerHTML=t.tour.map(([f,h,p])=>`<figure><img src="img/${f}.jpg" alt="${h}" loading="lazy"><figcaption><b>${h}</b>${p}</figcaption></figure>`).join("");
-  $("#grid").innerHTML=ORDER.map(k=>{const c=t.cards[k];return `<button class="fiche" data-k="${k}"><span class="ph" style="background-image:url('${IMG[k][IMG[k].length-1]}')"></span><span class="t"><b>${c.t}</b><small>${c.s}</small></span></button>`}).join("");
+  $("#grid").innerHTML=ORDER.map(k=>{const c=t.cards[k];return `<button class="fiche" data-k="${k}"><span class="ph" style="background-image:url('${TILE[k]||IMG[k][IMG[k].length-1]}')"></span><span class="t"><b>${c.t}</b><small>${c.s}</small></span></button>`}).join("");
   const pl=a=>a.map(([k,n,d,q])=>`<a class="place" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener"><span class="k">${k}</span><b>${n}</b><span>${d}</span><span class="go">${t.map}</span></a>`).join("");
   $("#acts").innerHTML=pl(t.acts);$("#food").innerHTML=pl(t.food);
   $("#check").innerHTML=t.leave.map(([id,x])=>`<label><input type="checkbox" id="c-${id}" ${done[id]?"checked":""}><span>${x}</span></label>`).join("");
