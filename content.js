@@ -55,7 +55,7 @@ fire:{t:"Foyer",s:"Bois et feu inversé",blocks:[
   {demo:"fire",h:"Monter un feu inversé"},
   {h:"Entretenir le feu",steps:["Ajoutez doucement des bûches de taille normale.","Les bûches fendues prennent plus facilement que les rondes."]}],
   tip:"<b>Important :</b> les bûches vont sur la largeur du foyer (de gauche à droite), jamais en profondeur.",
-  caps:["Le bois, dehors","Le foyer"],
+  caps:["Le bois, dehors","Le foyer"],vids:[{h:"Ouvrir la porte",cap:[[0,"Placez la clé en métal en haut à droite de la porte."],[1.5,"Tournez un peu : la porte s'ouvre."],[3,"Elle a un ressort : tenez-la ouverte d'une main."]]},{h:"Pendant le feu",cap:[[0,"Même geste pour ajouter du bois : la clé en haut à droite."],[3.5,"Ouvrez doucement la porte."],[5.5,"Refermez-la bien après."]]}],
   fire:["Grosses bûches en bas, une bien à l'avant pour que rien ne roule vers la porte.","Bûches moyennes par-dessus.","Petit bois d'allumage en haut.","Allumez par le haut. Le feu descend tout seul !"]},
 stove:{t:"Cuisinière",s:"Ronds au gaz, four électrique",blocks:[{demo:"stove",h:"Allumer un rond"},
   {h:"Étapes",steps:["Les petits points au-dessus de chaque bouton montrent quel rond il contrôle.","Poussez le bouton et tournez doucement vers la gauche.","Un clic : c'est l'allumage automatique, le gaz sort.","Gardez cette position quelques secondes, jusqu'à la flamme.","Réglez l'intensité. Pour éteindre, revenez sur « Off »."]},
@@ -71,7 +71,12 @@ win:{t:"Fenêtres",s:"Oscillo-battantes",blocks:[{demo:"win",h:"Les 3 positions"
   tip:"<b>Avant de partir :</b> toutes les poignées vers le bas. Il vente beaucoup ici !",
   caps:["La poignée"],win:[["Fermée","Poignée vers le bas : fenêtre fermée et verrouillée."],["Comme une porte","Poignée à l'horizontale : la fenêtre s'ouvre complètement."],["Aération","Poignée vers le haut : seul le haut s'ouvre en bascule."]]},
 heat:{t:"Chauffage",s:"Déjà configuré",blocks:[{h:"Simple comme bonjour",steps:["Chauffage et échangeur d'air fonctionnent tout seuls.","Utilisez seulement les flèches ▲ et ▼ pour la température.","Merci de ne pas toucher aux autres menus."]},
-  {h:"Qui chauffe quoi",steps:["Le thermostat du corridor principal contrôle tout l'étage.","Chaque salle de bain a son propre chauffage.","Au sous-sol, c'est un plancher chauffant."]}],caps:["Le thermostat du corridor"]}
+  {h:"Qui chauffe quoi",steps:["Le thermostat du corridor principal contrôle tout l'étage.","Chaque salle de bain a son propre chauffage.","Au sous-sol, c'est un plancher chauffant."]}],caps:["Le thermostat du corridor"]},
+vinyl:{t:"Table tournante",s:"Vinyles et musique",blocks:[
+  {h:"Faire jouer un disque",steps:["Montez le petit levier : le bras se soulève.","Déplacez doucement le bras vers la gauche, au-dessus du disque.","Redescendez le petit levier : le bras se pose et la musique commence."]},
+  {h:"Pour entendre la musique",steps:["Allumez la petite boîte noire : appuyez sur le bouton, une petite lumière bleue s'allume.","Allumez le haut-parleur et mettez-le sur « Aux » (auxiliaire)."]}],
+  tip:"<b>Important :</b> ne forcez jamais le bras. Utilisez toujours le petit levier (voir la vidéo).",
+  caps:["Le petit levier","La boîte noire et le haut-parleur"],vids:[{h:"Regardez comment faire",cap:[[0,"Montez le petit levier."],[3,"Déplacez doucement le bras vers la gauche, au-dessus du disque."],[8,"Redescendez le levier : la musique commence."],[16,"Sous la table tournante : la boîte noire et le haut-parleur."],[21,"Allumez la boîte noire : la lumière bleue s'allume."],[24,"Allumez le haut-parleur et mettez-le sur « Aux »."]]}]}
 }},
 en:{pr:{wifi:"Wi-Fi network",pass:"Password",phone:"Our number",web:"The web version, with photos and animations:",scan:"Scan with your phone camera",page:"Page",toc:"In this guide",printed:"Printed guide"},brand:"Le Malaga",titleTail:"House guide",click:"click!",where:"Austin · Eastern Townships",hello:"Welcome <em>to the lake</em>",
 introP:"Our family home is a place to slow down. This short guide shows you how everything works. Tap a card to see the steps.",
@@ -128,7 +133,7 @@ fire:{t:"Fireplace",s:"Wood and top-down fire",blocks:[
   {demo:"fire",h:"Building a top-down fire"},
   {h:"Keeping it going",steps:["Gently add normal-size logs.","Split logs catch more easily than round ones."]}],
   tip:"<b>Important:</b> logs go across the width of the fireplace (left to right), never front to back.",
-  caps:["Firewood, outside","The fireplace"],
+  caps:["Firewood, outside","The fireplace"],vids:[{h:"Opening the door",cap:[[0,"Put the metal key at the top right of the door."],[1.5,"Turn it slightly: the door opens."],[3,"It's spring-loaded: hold it open with one hand."]]},{h:"During a fire",cap:[[0,"Same move to add wood: key at the top right."],[3.5,"Open the door gently."],[5.5,"Close it properly afterwards."]]}],
   fire:["Big logs at the bottom, one right at the front so nothing rolls toward the door.","Medium logs on top.","Small kindling on top of that.","Light it from the top. The fire works its way down!"]},
 stove:{t:"Stove",s:"Gas burners, electric oven",blocks:[{demo:"stove",h:"Lighting a burner"},
   {h:"Steps",steps:["The small dots above each knob show which burner it controls.","Push the knob in and slowly turn it left.","A click: that's the auto-igniter, gas is flowing.","Hold that position a few seconds until the flame appears.","Adjust the heat. To turn off, go back to “Off”."]},
@@ -144,7 +149,12 @@ win:{t:"Windows",s:"Tilt and turn",blocks:[{demo:"win",h:"The 3 positions"},
   tip:"<b>Before leaving:</b> every handle down. It gets very windy here!",
   caps:["The handle"],win:[["Closed","Handle down: window closed and locked."],["Like a door","Handle sideways: the window swings fully open."],["Airing","Handle up: only the top tilts open."]]},
 heat:{t:"Heating",s:"Already set up",blocks:[{h:"Easy",steps:["Heating and air exchanger run on their own.","Only use the ▲ and ▼ arrows to set the temperature.","Please don't change the other menus."]},
-  {h:"What heats what",steps:["The thermostat in the main hallway controls the whole floor.","Each bathroom has its own heating.","The basement has heated floors."]}],caps:["Hallway thermostat"]}
+  {h:"What heats what",steps:["The thermostat in the main hallway controls the whole floor.","Each bathroom has its own heating.","The basement has heated floors."]}],caps:["Hallway thermostat"]},
+vinyl:{t:"Record player",s:"Vinyl and music",blocks:[
+  {h:"Playing a record",steps:["Raise the small lever: the arm lifts up.","Gently move the arm to the left, over the record.","Lower the small lever: the arm sets down and the music starts."]},
+  {h:"To hear the music",steps:["Turn on the small black box: press the button, a small blue light comes on.","Turn on the speaker and set it to “Aux” (auxiliary)."]}],
+  tip:"<b>Important:</b> never force the arm. Always use the small lever (see the video).",
+  caps:["The small lever","The black box and the speaker"],vids:[{h:"Watch how it's done",cap:[[0,"Raise the small lever."],[3,"Gently move the arm to the left, over the record."],[8,"Lower the lever: the music starts."],[16,"Under the record player: the black box and the speaker."],[21,"Turn on the black box: the blue light comes on."],[24,"Turn on the speaker and set it to “Aux”."]]}]}
 }},
 es:{pr:{wifi:"Red Wi-Fi",pass:"Contraseña",phone:"Nuestro número",web:"La versión web, con fotos y animaciones:",scan:"Escaneen con la cámara del teléfono",page:"Página",toc:"En esta guía",printed:"Guía impresa"},brand:"Le Malaga",titleTail:"Guía de la casa",click:"¡clic!",where:"Austin · Cantons-de-l'Est (Quebec)",hello:"Bienvenidos <em>a la orilla del lago</em>",
 introP:"Nuestra casa familiar es un lugar para ir más despacio. Esta pequeña guía les muestra cómo funciona todo. Toquen una ficha para ver los pasos.",
@@ -201,7 +211,7 @@ fire:{t:"Chimenea",s:"Leña y fuego invertido",blocks:[
   {demo:"fire",h:"Armar un fuego invertido"},
   {h:"Mantener el fuego",steps:["Agreguen con cuidado troncos de tamaño normal.","Los troncos partidos prenden más fácil que los redondos."]}],
   tip:"<b>Importante:</b> los troncos van a lo ancho de la chimenea (de izquierda a derecha), nunca a lo largo.",
-  caps:["La leña, afuera","La chimenea"],
+  caps:["La leña, afuera","La chimenea"],vids:[{h:"Abrir la puerta",cap:[[0,"Coloquen la llave de metal arriba a la derecha de la puerta."],[1.5,"Giren un poco: la puerta se abre."],[3,"Tiene un resorte: sosténganla abierta con una mano."]]},{h:"Durante el fuego",cap:[[0,"El mismo gesto para agregar leña: la llave arriba a la derecha."],[3.5,"Abran la puerta con cuidado."],[5.5,"Ciérrenla bien después."]]}],
   fire:["Troncos grandes abajo, uno bien adelante para que nada ruede hacia la puerta.","Troncos medianos encima.","Astillas para encender arriba.","Enciendan por arriba. ¡El fuego baja solo!"]},
 stove:{t:"Estufa",s:"Hornillas a gas, horno eléctrico",blocks:[{demo:"stove",h:"Encender una hornilla"},
   {h:"Pasos",steps:["Los puntitos sobre cada perilla indican qué hornilla controla.","Presionen la perilla y gírenla despacio hacia la izquierda.","Un clic: es el encendido automático, sale el gas.","Mantengan esa posición unos segundos, hasta que aparezca la llama.","Ajusten la intensidad. Para apagar, vuelvan a « Off »."]},
@@ -217,6 +227,11 @@ win:{t:"Ventanas",s:"Oscilobatientes",blocks:[{demo:"win",h:"Las 3 posiciones"},
   tip:"<b>Antes de salir:</b> todas las manijas hacia abajo. ¡Aquí hace mucho viento!",
   caps:["La manija"],win:[["Cerrada","Manija hacia abajo: ventana cerrada y asegurada."],["Como una puerta","Manija horizontal: la ventana se abre por completo."],["Ventilación","Manija hacia arriba: solo se inclina la parte de arriba."]]},
 heat:{t:"Calefacción",s:"Ya está configurada",blocks:[{h:"Muy fácil",steps:["La calefacción y el intercambiador de aire funcionan solos.","Usen solo las flechas ▲ y ▼ para la temperatura.","Por favor no toquen los otros menús."]},
-  {h:"Qué calienta qué",steps:["El termostato del pasillo principal controla todo el piso.","Cada baño tiene su propia calefacción.","En el sótano hay piso radiante."]}],caps:["Termostato del pasillo"]}
+  {h:"Qué calienta qué",steps:["El termostato del pasillo principal controla todo el piso.","Cada baño tiene su propia calefacción.","En el sótano hay piso radiante."]}],caps:["Termostato del pasillo"]},
+vinyl:{t:"Tocadiscos",s:"Vinilos y música",blocks:[
+  {h:"Poner un disco",steps:["Suban la palanquita: el brazo se levanta.","Muevan el brazo con cuidado hacia la izquierda, sobre el disco.","Bajen la palanquita: el brazo se apoya y empieza la música."]},
+  {h:"Para escuchar la música",steps:["Enciendan la cajita negra: presionen el botón, se enciende una lucecita azul.","Enciendan el altavoz y pónganlo en « Aux » (auxiliar)."]}],
+  tip:"<b>Importante:</b> nunca fuercen el brazo. Usen siempre la palanquita (vean el video).",
+  caps:["La palanquita","La cajita negra y el altavoz"],vids:[{h:"Miren cómo se hace",cap:[[0,"Suban la palanquita."],[3,"Muevan el brazo con cuidado hacia la izquierda, sobre el disco."],[8,"Bajen la palanquita: empieza la música."],[16,"Debajo del tocadiscos: la cajita negra y el altavoz."],[21,"Enciendan la cajita negra: se enciende la luz azul."],[24,"Enciendan el altavoz y pónganlo en « Aux »."]]}]}
 }},
 };

@@ -3,7 +3,7 @@
 set -e
 BASE="https://davecastonguay.github.io/le-malaga/"
 TMP=$(mktemp -d)
-for pair in "site:" "door:#door" "fire:#fire" "stove:#stove" "patio:#patio" "win:#win" "heat:#heat" "partir:#partir" "urgences:#urgences"; do
+for pair in "site:" "door:#door" "fire:#fire" "stove:#stove" "patio:#patio" "win:#win" "heat:#heat" "vinyl:#vinyl" "partir:#partir" "urgences:#urgences"; do
   name=${pair%%:*}; frag=${pair#*:}
   url="$BASE$frag"
   esc=$(printf '%s' "$url" | sed 's/#/\\#/g')
