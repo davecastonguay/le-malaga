@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Guide de la maison du lac</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: one calm column like a guest binder; tappable "fiches" open a sheet with steps + a small animated demo */
+:root{
+  --paper:#eef2f1; --card:#ffffff; --ink:#15252a; --muted:#56686c; --line:#d3dcdb;
+  --lake:#1d5a63; --lake-soft:#d6e7e7; --maple:#b9471f; --maple-soft:#f6e1d6; --sky:#cfe0e3;
+  --hill1:#2f5c4a; --hill2:#c6702f; --hill3:#9b3d22; --water:#3d7d86;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0d181b; --card:#14242a; --ink:#e4eceb; --muted:#9db0b2; --line:#253a40;
+  --lake:#7cc3c8; --lake-soft:#1b3439; --maple:#ec8a5f; --maple-soft:#3a2219; --sky:#1a2d33;
+  --hill1:#244a3c; --hill2:#8f4f22; --hill3:#6e2b18; --water:#2a5c64; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0d181b; --card:#14242a; --ink:#e4eceb; --muted:#9db0b2; --line:#253a40;
+  --lake:#7cc3c8; --lake-soft:#1b3439; --maple:#ec8a5f; --maple-soft:#3a2219; --sky:#1a2d33;
+  --hill1:#244a3c; --hill2:#8f4f22; --hill3:#6e2b18; --water:#2a5c64; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--maple);outline-offset:2px;border-radius:6px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar .in{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.05rem;flex:1;min-width:0}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--card)}
+.lang button{border:0;background:none;padding:5px 12px;border-radius:999px;font-weight:700;font-size:.85rem;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--lake);color:var(--paper)}
+
+/* hero */
+.hero{margin-top:18px;border-radius:18px;overflow:hidden;background:var(--sky);position:relative}
+.hero svg{display:block;width:100%;height:auto}
+.hero-img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 60%}
+.hero-cap{position:absolute;left:12px;bottom:12px;font-size:.8rem;font-weight:700;padding:5px 10px;border-radius:999px;background:rgb(0 0 0 / .55);color:#fff}
+.gallery{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-inline:-16px;padding-inline:16px;scroll-padding-inline:16px}
+.gallery figure{margin:0;flex:0 0 min(78%,340px);scroll-snap-align:start;display:grid;gap:6px}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:var(--lake-soft)}
+.gallery figcaption{font-size:.88rem;color:var(--muted)}
+.gallery figcaption b{color:var(--ink);font-family:var(--display);font-size:1rem;display:block}
+.wide{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px}
+.note.with-img{grid-template-columns:minmax(0,120px) minmax(0,1fr);align-items:start;gap:14px}
+.note.with-img img{border-radius:10px;aspect-ratio:1;object-fit:cover;width:100%}
+.ripple{animation:drift 7s ease-in-out infinite}
+.ripple:nth-child(2){animation-delay:-2s}.ripple:nth-child(3){animation-delay:-4s}
+@keyframes drift{50%{transform:translateX(14px)}}
+.intro{display:grid;gap:12px;padding-block:22px 6px}
+.intro h1{font-size:clamp(2rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.intro h1 em{font-style:normal;color:var(--maple)}
+.intro p{color:var(--muted);max-width:60ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.facts span{font-size:.85rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+
+section{margin-top:40px;display:grid;gap:14px}
+.sec-head{display:grid;gap:4px}
+
+/* fiche grid */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.fiche{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:0;text-align:left;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s}
+.fiche:hover{transform:translateY(-2px)}
+.fiche .ph{aspect-ratio:4/3;width:100%;background:var(--lake-soft) center/cover no-repeat}
+.fiche .t{padding:10px 12px 12px;display:grid;gap:2px}
+.fiche .t b{font-family:var(--display);font-size:1.02rem}
+.fiche .t small{color:var(--muted);font-size:.82rem;line-height:1.3}
+
+/* notes */
+.note{border-radius:14px;padding:16px;display:grid;gap:8px;border:1px solid var(--line);background:var(--card)}
+.note.warn{background:var(--maple-soft);border-color:transparent}
+.note.warn h3{color:var(--maple)}
+.note.eco{background:var(--lake-soft);border-color:transparent}
+.note.eco h3{color:var(--lake)}
+ul.pts{margin:0;padding-left:1.1em;display:grid;gap:4px}
+
+/* checklist */
+.check{display:grid;gap:8px}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--lake);flex:none;margin-top:1px}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.progress{font-size:.9rem;color:var(--muted)}
+.places{display:grid;gap:10px}
+@media(min-width:620px){.places{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.place{display:grid;gap:4px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:inherit;text-decoration:none}
+.place:hover{border-color:var(--lake)}
+.place b{font-family:var(--display);font-size:1.05rem}
+.place .k{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--maple)}
+.place span:last-child{font-size:.92rem;color:var(--muted)}
+.place .go{font-size:.82rem;font-weight:700;color:var(--lake)}
+.soon{border:1.5px dashed var(--line);border-radius:14px;padding:16px;color:var(--muted);display:grid;gap:6px}
+.soon b{color:var(--ink);font-family:var(--display)}
+
+/* sheet */
+dialog{border:0;padding:0;width:min(640px,100%);max-height:92vh;border-radius:20px 20px 0 0;margin:auto auto 0;background:var(--paper);color:var(--ink)}
+@media(min-width:620px){dialog{border-radius:20px;margin:auto}}
+dialog::backdrop{background:rgb(0 0 0 / .45)}
+.sh{display:grid;gap:18px;padding:18px 16px 28px}
+.sh-top{display:flex;align-items:center;gap:10px}
+.sh-top h2{flex:1;min-width:0}
+.x{border:1px solid var(--line);background:var(--card);border-radius:999px;width:38px;height:38px;font-size:1.2rem;line-height:1}
+.photos{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory}
+.photos figure{margin:0;flex:0 0 72%;max-width:300px;scroll-snap-align:start;display:grid;gap:4px}
+.photos img{border-radius:12px;aspect-ratio:3/4;object-fit:cover;width:100%}
+.photos figcaption{font-size:.8rem;color:var(--muted)}
+.block{display:grid;gap:8px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:8px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+ol.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--lake);color:var(--paper);font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.tip{font-size:.92rem;padding:10px 12px;border-radius:10px;background:var(--maple-soft)}
+.tip b{color:var(--maple)}
+
+/* demos */
+.demo{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px;display:grid;gap:12px}
+.demo .stage{display:grid;place-items:center;min-height:200px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{flex:1 1 auto;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 10px;font-size:.88rem;font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--lake);border-color:var(--lake);color:var(--paper)}
+.cap{font-size:.95rem;min-height:2.8em}
+.cap b{color:var(--lake)}
+
+/* window demo */
+.win{width:150px;height:190px;perspective:600px;position:relative}
+.frame{position:absolute;inset:0;border:7px solid var(--ink);border-radius:4px;background:linear-gradient(var(--sky),var(--hill1))}
+.sash{position:absolute;inset:7px;border:6px solid var(--ink);background:rgb(255 255 255 / .18);transition:transform .7s cubic-bezier(.3,.7,.2,1)}
+.handle{position:absolute;right:-1px;top:50%;width:8px;height:34px;margin-top:-4px;background:var(--maple);border-radius:4px;transform-origin:50% 4px;transition:transform .45s}
+.win[data-s="closed"] .handle{transform:rotate(0deg)}
+.win[data-s="turn"] .handle{transform:rotate(90deg)}
+.win[data-s="tilt"] .handle{transform:rotate(180deg)}
+.win[data-s="turn"] .sash{transform-origin:left center;transform:rotateY(-48deg)}
+.win[data-s="tilt"] .sash{transform-origin:center bottom;transform:rotateX(18deg)}
+
+/* patio demo */
+.patio{width:230px;height:170px;position:relative;border:6px solid var(--ink);border-radius:4px;background:linear-gradient(var(--sky) 55%,var(--water));overflow:hidden}
+.panel{position:absolute;top:4px;bottom:4px;right:4px;width:48%;border:6px solid var(--ink);background:rgb(255 255 255 / .2);transition:transform .8s cubic-bezier(.3,.7,.2,1)}
+.panel .ph2{position:absolute;left:4px;top:50%;width:7px;height:30px;margin-top:-4px;background:var(--maple);border-radius:4px;transform-origin:50% 4px;transform:rotate(180deg);transition:transform .45s}
+.fixed{position:absolute;top:4px;bottom:4px;left:4px;width:48%;border:6px solid var(--ink)}
+.rollers{position:absolute;bottom:-1px;left:8px;right:8px;height:6px;display:flex;justify-content:space-between;opacity:0;transition:opacity .3s}
+.rollers i{width:6px;height:6px;border-radius:50%;background:var(--maple)}
+.patio[data-s="lift"] .ph2,.patio[data-s="open"] .ph2{transform:rotate(0deg)}
+.patio[data-s="lift"] .panel{transform:translateY(-4px)}
+.patio[data-s="open"] .panel{transform:translate(-88%,-4px)}
+.patio[data-s="lift"] .rollers,.patio[data-s="open"] .rollers{opacity:1}
+
+/* fire demo */
+.fire svg{width:220px;max-width:100%;height:auto}
+.layer{opacity:0;transform:translateY(-14px);transition:opacity .4s,transform .5s cubic-bezier(.3,.7,.2,1)}
+.layer.on{opacity:1;transform:none}
+.flame{transform-origin:110px 112px;animation:flick .5s ease-in-out infinite alternate}
+@keyframes flick{to{transform:scale(1.06,.93)}}
+
+/* stove demo */
+.knob{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--card),var(--line));border:3px solid var(--ink);position:relative;transition:transform .5s}
+.knob::after{content:"";position:absolute;left:50%;top:8px;width:6px;height:26px;margin-left:-3px;background:var(--maple);border-radius:3px}
+.stove{display:grid;justify-items:center;gap:10px}
+.burner{width:140px;height:44px;position:relative}
+.burner .ring{position:absolute;left:20px;right:20px;bottom:0;height:14px;border-radius:50%;background:var(--ink)}
+.burner .fl{position:absolute;bottom:8px;width:10px;height:22px;border-radius:50% 50% 40% 40%;background:#3a7bff;opacity:0;transform:scaleY(.2);transform-origin:bottom;transition:.35s}
+.stove[data-s="lit"] .fl{opacity:.9;transform:scaleY(1);animation:flick .35s infinite alternate}
+.spark{font-weight:800;color:var(--maple);font-family:var(--display);opacity:0;transition:opacity .2s;height:1.2em}
+.stove[data-s="push"] .knob{transform:scale(.92) rotate(-50deg)}
+.stove[data-s="click"] .knob,.stove[data-s="lit"] .knob{transform:rotate(-50deg)}
+.stove[data-s="click"] .spark{opacity:1}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="in">
+  <div class="brand" data-t="brand"></div>
+  <div class="lang" role="group" aria-label="Langue / Language">
+    <button id="fr" aria-pressed="true">FR</button><button id="en" aria-pressed="false">EN</button>
+  </div>
+</div></div>
+
+<div class="wrap">
+  <div class="hero"><video class="hero-img amb" src="img/terrasse.mp4" poster="img/terrasse-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video><span class="hero-cap" data-t="heroCap"></span></div>
+  <div class="hero-old" hidden aria-hidden="true">
+    <svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="170" fill="var(--sky)"/>
+      <circle cx="320" cy="40" r="16" fill="var(--paper)" opacity=".8"/>
+      <path d="M0 92 Q60 50 120 80 T240 70 T400 78 V110 H0Z" fill="var(--hill1)"/>
+      <path d="M0 100 Q70 72 150 94 T300 86 T400 96 V112 H0Z" fill="var(--hill2)"/>
+      <path d="M0 106 Q90 92 200 104 T400 102 V114 H0Z" fill="var(--hill3)"/>
+      <rect y="110" width="400" height="60" fill="var(--water)"/>
+      <g stroke="var(--paper)" stroke-width="2" stroke-linecap="round" opacity=".55">
+        <path class="ripple" d="M40 128 h50 M150 140 h70 M280 126 h44"/>
+        <path class="ripple" d="M90 152 h40 M230 156 h60"/>
+        <path class="ripple" d="M10 162 h30 M330 146 h50"/>
+      </g>
+      <g transform="translate(250 112)"><path d="M0 0 h40 l-6 8 h-28z" fill="var(--maple)"/><rect x="18" y="-14" width="2" height="14" fill="var(--ink)"/></g>
+    </svg>
+  </div>
+
+  <div class="intro">
+    <span class="eyebrow" data-t="where"></span>
+    <h1 data-t="hello"></h1>
+    <p data-t="introP"></p>
+    <div class="facts" id="facts"></div>
+  </div>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow" data-t="tourEye"></span><h2 data-t="tourH"></h2></div>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow" data-t="howEye"></span><h2 data-t="howH"></h2></div>
+    <div class="grid" id="grid"></div>
+    <div class="note eco"><h3 data-t="waterH"></h3><ul class="pts" data-l="water"></ul></div>
+    <div class="note"><h3 data-t="pantryH"></h3><ul class="pts" data-l="pantry"></ul></div>
+    <div class="note warn with-img"><img src="img/pingpong.jpg" alt=""><div><h3 data-t="pingH"></h3><ul class="pts" data-l="ping"></ul></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow" data-t="lakeEye"></span><h2 data-t="lakeH"></h2></div>
+    <video class="wide amb" src="img/quai.mp4" poster="img/quai-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="note eco"><h3 data-t="vestH"></h3><ul class="pts" data-l="vest"></ul></div>
+    <div class="note warn"><h3 data-t="windH"></h3><ul class="pts" data-l="wind"></ul></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow" data-t="cleanEye"></span><h2 data-t="cleanH"></h2></div>
+    <div class="note"><ul class="pts" data-l="clean"></ul></div>
+    <div class="note eco"><h3 data-t="ecoH"></h3><ul class="pts" data-l="eco"></ul></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow" data-t="leaveEye"></span><h2 data-t="leaveH"></h2><p class="progress" id="prog"></p></div>
+    <div class="check" id="check"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow" data-t="soonEye"></span><h2 data-t="soonH"></h2></div>
+    <p class="progress" data-t="aroundNote"></p>
+    <h3 data-t="actH"></h3>
+    <div class="places" id="acts"></div>
+    <h3 data-t="foodH"></h3>
+    <div class="places" id="food"></div>
+  </section>
+
+  <footer data-t="foot"></footer>
+</div>
+
+<dialog id="sheet" aria-labelledby="shT"><div class="sh" id="sh"></div></dialog>
+
+<script>
+const T={
+fr:{brand:"Maison du lac",where:"Austin · Cantons-de-l'Est",hello:"Bienvenue <em>au bord du lac</em>",
+introP:"Notre maison familiale est un endroit pour ralentir. Ce petit guide vous montre comment tout fonctionne. Touchez une fiche pour voir les étapes.",
+facts:["3 chambres","Bord du lac","Wi-Fi","Stationnement","Jardin"],
+heroCap:"La terrasse, face au lac",tourEye:"Visite",tourH:"La maison en images",
+tour:[["maison-lac","Côté lac","La maison vue du bord de l'eau."],["terrasse","La terrasse couverte","Pour manger dehors face au lac."],["salon","Le salon","Le foyer et la grande fenêtre sur la montagne."],["cuisine","Cuisine et salle à manger","Une grande table pour toute la famille."],["salle-jeux","La salle de jeux","Au sous-sol : ping-pong, divan et télé."],["chambre1","Une chambre","Plafond en bois et vue sur les arbres."],["chambre2","Une autre chambre",""],["bain","La salle de bain","Bain devant la forêt."],["vue","La vue","Le lac, depuis l'étage."],["feu-camp","Le coin feu","Chaises et bois, dans la forêt."],["kayaks","Le quai","Les kayaks, au bord de l'eau."],["terrain","Le terrain","Gazon et trampoline."],["entree","L'entrée","Stationnement et garage."]],
+howEye:"Mode d'emploi",howH:"Comment ça marche",
+waterH:"💧 L'eau",water:["L'eau vient d'un puits artésien. Elle peut sentir un peu le soufre, mais elle est filtrée et bonne à boire.","Le puits n'est pas illimité : merci d'utiliser l'eau avec modération.","Pour boire, on utilise surtout l'eau filtrée du frigo (porte de gauche).","Vous pouvez aussi utiliser le bidon d'eau."],
+pantryH:"🧂 Servez-vous",pantry:["Condiments du frigo, sel, poivre, épices, huile : aucun problème, servez-vous !","Tout… sauf mes grosses bouteilles d'alcool. 😉"],
+pingH:"🏓 Table de ping-pong",ping:["La surface est fragile.","Ne déposez rien dessus : pas d'assiettes, de nourriture, de boissons ni rien d'humide.","Elle sert seulement à jouer !"],lakeEye:"Le lac",lakeH:"Profitez du lac",
+vestH:"Gilets de flottaison",vest:["Ils sont dans un bac à l'extérieur, sous le balcon.","Servez-vous, ils sont là pour vous !"],
+windH:"⚠ Vent et pluie",wind:["Il vente beaucoup au bord du lac.","Une fenêtre mal fermée peut s'ouvrir toute seule et laisser entrer la pluie. C'est déjà arrivé !","En partant, toutes les poignées de fenêtres vers le bas."],
+cleanEye:"Ménage",cleanH:"Avant votre départ",
+clean:["Nous n'avons pas de service de ménage dans le coin, donc aucuns frais supplémentaires.","Merci de faire le ménage vous-mêmes.","L'idée est simple : laisser la maison aussi propre qu'à votre arrivée.","Aspirateur central : le boyau est dans la garde-robe de l'entrée. Il y a une prise à chaque étage (sous-sol, rez-de-chaussée et étage)."],
+ecoH:"Produits nettoyants",eco:["Merci de ne pas apporter vos propres produits.","Utilisez seulement ceux de la maison : ils sont biologiques.","La maison a une fosse septique et elle est tout près du lac. On veut garder le lac en santé !"],
+leaveEye:"Liste",leaveH:"Avant de quitter la maison",
+leave:["Fenêtres fermées, poignées vers le bas","Portes patio fermées, poignées vers le haut","Porte d'entrée verrouillée","Thermostat du corridor réglé à 15 °C","Ménage fait avec les produits de la maison"],
+prog:(a,b)=>`${a} sur ${b} fait`,
+soonEye:"Les environs",soonH:"Autour de Magog",map:"Voir sur la carte →",
+aroundNote:"Quelques idées pour découvrir la région. Vérifiez les heures d'ouverture avant d'y aller, elles changent selon la saison.",
+actH:"À faire",foodH:"Où manger",
+acts:[["Tout près","Abbaye de Saint-Benoît-du-Lac","Une abbaye au bord du lac. La boutique des moines vend fromages, cidre et compotes.","Abbaye Saint-Benoît-du-Lac"],
+["Plein air","Parc national du Mont-Orford","Randonnées pour tous les niveaux, et plages surveillées l'été (Stukely et Fraser).","Parc national du Mont-Orford"],
+["Automne","Mont Orford et la Flambée des couleurs","Les fins de semaine d'automne, les couleurs sont spectaculaires sur la montagne.","Mont Orford"],
+["En ville","Centre-ville de Magog","Boutiques et cafés sur la rue Principale, puis promenade au bord du lac Memphrémagog.","rue Principale Ouest Magog"],
+["En famille","Pointe Merry et Plage des Cantons","Parc au bord de l'eau en plein centre-ville. Baignade l'été à la Plage des Cantons.","Pointe Merry Magog"],
+["Vélo","Piste cyclable Magog-Orford","Une belle piste qui part de la Pointe Merry. Location de vélos sur place l'été.","Pointe Merry Magog"],
+["Nature","Marais de la Rivière-aux-Cerises","Sentiers et passerelles sur le marais, faciles pour les enfants. Idéal pour voir des oiseaux.","Marais de la Rivière-aux-Cerises"],
+["Été","Bleu Lavande","Champs de lavande en fleurs en juin et juillet, avec boutique et pique-nique.","Bleu Lavande Fitch Bay"]],
+food:[["Bière et pub","Microbrasserie La Memphré","Bières brassées sur place, ambiance décontractée.","Microbrasserie La Memphré Magog"],
+["Pub gourmand","Taverne 1855","Cuisine de taverne bien faite, en plein centre-ville.","Taverne 1855 Magog"],
+["Bistro","Bistro 4 Saisons","Cuisine française soignée, à Orford. Parfait pour un souper spécial.","Bistro 4 Saisons Orford"],
+["Bistro","Au Comptoir Marcel","Bonne cuisine et service attentionné.","Au Comptoir Marcel Magog"],
+["Italien","Alessa Trattoria","Pizzas et pâtes, populaire auprès des familles.","Alessa Trattoria Magog"],
+["Méditerranéen","Bistro Kóz","Grand choix de plats méditerranéens. Crème glacée LeCornet juste à côté.","Bistro Koz Magog"]],
+foot:"Bon séjour ! · Dave et sa famille",photo:"Photo",close:"Fermer",next:"Étape suivante",again:"Recommencer",light:"Allumer",
+cards:{
+door:{t:"Porte d'entrée",s:"Verrouiller",blocks:[
+  {h:"De l'extérieur (avec la clé)",steps:["Fermez la porte.","Levez la poignée vers le haut. Une petite pression, c'est normal.","Tournez la clé vers la droite (sens horaire) jusqu'au bout.","Revenez un peu en arrière pour retirer la clé. C'est verrouillé !"]},
+  {h:"De l'intérieur",steps:["Fermez la porte.","Levez la poignée vers le haut jusqu'au bout. Ça enclenche le loquet.","Tournez le petit bouton vers la gauche (sens antihoraire) jusqu'au bout.","Pour vérifier, essayez d'ouvrir avec la poignée."]}],
+  caps:["Extérieur","Intérieur"]},
+fire:{t:"Foyer",s:"Bois et feu inversé",blocks:[
+  {h:"Le bois",steps:["Le bois est à l'extérieur, près de la porte d'entrée.","Prenez quelques bûches à la fois.","Rangez-les dans l'espace sous le foyer."]},
+  {h:"Ouvrir la porte du foyer",steps:["Prenez la clé en métal (petite barre avec un trou).","Insérez-la en haut à droite de la porte et tournez un peu.","La porte a un ressort : tenez-la ouverte d'une main, c'est normal."]},
+  {demo:"fire",h:"Monter un feu inversé"},
+  {h:"Entretenir le feu",steps:["Ajoutez doucement des bûches de taille normale.","Les bûches fendues prennent plus facilement que les rondes."]}],
+  tip:"<b>Important :</b> les bûches vont sur la largeur du foyer (de gauche à droite), jamais en profondeur.",
+  caps:["Le bois, dehors","Le foyer"],
+  fire:["Grosses bûches en bas, une bien à l'avant pour que rien ne roule vers la porte.","Bûches moyennes par-dessus.","Petit bois d'allumage en haut.","Allumez par le haut. Le feu descend tout seul !"]},
+stove:{t:"Cuisinière",s:"Ronds au gaz, four électrique",blocks:[{demo:"stove",h:"Allumer un rond"},
+  {h:"Étapes",steps:["Les petits points au-dessus de chaque bouton montrent quel rond il contrôle.","Poussez le bouton et tournez doucement vers la gauche.","Un clic : c'est l'allumage automatique, le gaz sort.","Gardez cette position quelques secondes, jusqu'à la flamme.","Réglez l'intensité. Pour éteindre, revenez sur « Off »."]},
+  {h:"Bon à savoir",steps:["Les ronds sont au gaz, mais le four est électrique.","S'il manque de gaz, utilisez le four électrique ou le rond à induction rangé dans le rangement de l'entrée."]}],
+  caps:["Les boutons"],stove:["Bouton sur « Off ».","Poussez et tournez vers la gauche…","Clic ! Le gaz sort. Attendez quelques secondes.","La flamme est là. Réglez l'intensité."]},
+patio:{t:"Portes patio",s:"Poignée à 180°",blocks:[{demo:"patio",h:"Comment ça glisse"},
+  {h:"Ouvrir",steps:["La porte doit être fermée.","Tournez la poignée de 180° vers le bas : la porte monte sur ses roulettes.","Faites glisser la porte."]},
+  {h:"Fermer",steps:["Faites glisser la porte jusqu'au bout.","Remontez la poignée vers le haut : la porte s'appuie au sol."]}],
+  tip:"<b>Important :</b> déplacez la porte seulement quand la poignée est vers le bas.",
+  caps:["La poignée"],patio:[["Fermée","Poignée en haut : la porte est appuyée au sol, bien fermée."],["Poignée en bas","La porte monte sur ses roulettes. Elle est prête à glisser."],["Ouverte","Faites glisser. Gardez la poignée en bas tant que c'est ouvert."]]},
+win:{t:"Fenêtres",s:"Oscillo-battantes",blocks:[{demo:"win",h:"Les 3 positions"},
+  {h:"Bon à savoir",steps:["Changez la position de la poignée seulement quand la fenêtre est fermée.","Pour fermer : poussez la fenêtre contre le cadre, puis poignée vers le bas."]}],
+  tip:"<b>Avant de partir :</b> toutes les poignées vers le bas. Il vente beaucoup ici !",
+  caps:["La poignée"],win:[["Fermée","Poignée vers le bas : fenêtre fermée et verrouillée."],["Comme une porte","Poignée à l'horizontale : la fenêtre s'ouvre complètement."],["Aération","Poignée vers le haut : seul le haut s'ouvre en bascule."]]},
+heat:{t:"Chauffage",s:"Déjà configuré",blocks:[{h:"Simple comme bonjour",steps:["Chauffage et échangeur d'air fonctionnent tout seuls.","Utilisez seulement les flèches ▲ et ▼ pour la température.","Merci de ne pas toucher aux autres menus."]},
+  {h:"Qui chauffe quoi",steps:["Le thermostat du corridor principal contrôle tout l'étage.","Chaque salle de bain a son propre chauffage.","Au sous-sol, c'est un plancher chauffant."]}],caps:["Le thermostat du corridor"]}
+}},
+en:{brand:"Lake House",where:"Austin · Eastern Townships",hello:"Welcome <em>to the lake</em>",
+introP:"Our family home is a place to slow down. This short guide shows you how everything works. Tap a card to see the steps.",
+facts:["3 bedrooms","Lakefront","Wi-Fi","Parking","Garden"],
+heroCap:"The deck, facing the lake",tourEye:"Tour",tourH:"The house in pictures",
+tour:[["maison-lac","Lake side","The house seen from the water's edge."],["terrasse","Covered deck","Eat outside facing the lake."],["salon","Living room","The fireplace and the big window on the mountain."],["cuisine","Kitchen and dining","A big table for the whole family."],["salle-jeux","Games room","Downstairs: ping-pong, couch and TV."],["chambre1","A bedroom","Wood ceiling and a view of the trees."],["chambre2","Another bedroom",""],["bain","Bathroom","A bath facing the forest."],["vue","The view","The lake, from upstairs."],["feu-camp","Fire pit","Chairs and wood, in the forest."],["kayaks","The dock","The kayaks, at the water's edge."],["terrain","The yard","Lawn and trampoline."],["entree","Entrance","Parking and garage."]],
+howEye:"How-to",howH:"How things work",
+waterH:"💧 Water",water:["The water comes from an artesian well. It may smell a little of sulfur, but it's filtered and safe to drink.","The well isn't unlimited: please use water sparingly.","For drinking, we mostly use the filtered water from the fridge (left door).","You can also use the water jug."],
+pantryH:"🧂 Help yourselves",pantry:["Fridge condiments, salt, pepper, spices, oil: no problem, help yourselves!","Everything… except my big bottles of booze. 😉"],
+pingH:"🏓 Ping-pong table",ping:["The surface is fragile.","Please don't put anything on it: no plates, food, drinks or anything wet.","It's just for playing!"],lakeEye:"The lake",lakeH:"Enjoy the lake",
+vestH:"Life jackets",vest:["They're in a bin outside, under the deck.","Help yourselves, they're there for you!"],
+windH:"⚠ Wind and rain",wind:["It gets very windy by the lake.","A window that isn't fully closed can blow open and let rain in. It has happened!","When you leave, turn every window handle down."],
+cleanEye:"Cleaning",cleanH:"Before you leave",
+clean:["We don't have a cleaning service nearby, so there are no extra fees.","Please do the cleaning yourselves.","Simple idea: leave the house as clean as you found it.","Central vacuum: the hose is in the entrance closet. There's an outlet on every floor (basement, main floor and upstairs)."],
+ecoH:"Cleaning products",eco:["Please don't bring your own products.","Use only the ones in the house: they're biodegradable.","The house has a septic tank and sits right by the lake. We want to keep the lake healthy!"],
+leaveEye:"Checklist",leaveH:"Before leaving the house",
+leave:["Windows closed, handles down","Patio doors closed, handles up","Front door locked","Hallway thermostat set to 15 °C","Cleaning done with the house products"],
+prog:(a,b)=>`${a} of ${b} done`,
+soonEye:"Nearby",soonH:"Around Magog",map:"See on the map →",
+aroundNote:"A few ideas to explore the area. Check opening hours before you go, they change with the seasons.",
+actH:"Things to do",foodH:"Where to eat",
+acts:[["Very close","Saint-Benoît-du-Lac Abbey","An abbey on the lake. The monks' shop sells cheese, cider and applesauce.","Abbaye Saint-Benoît-du-Lac"],
+["Outdoors","Mont-Orford National Park","Hikes for every level, and supervised beaches in summer (Stukely and Fraser).","Parc national du Mont-Orford"],
+["Fall","Mont Orford fall colours","On autumn weekends, the colours on the mountain are spectacular.","Mont Orford"],
+["In town","Downtown Magog","Shops and cafés on rue Principale, then a walk along Lake Memphremagog.","rue Principale Ouest Magog"],
+["Family","Pointe Merry and Plage des Cantons","A waterfront park right downtown. Summer swimming at Plage des Cantons.","Pointe Merry Magog"],
+["Biking","Magog-Orford bike path","A scenic path starting at Pointe Merry. Bike rentals nearby in summer.","Pointe Merry Magog"],
+["Nature","Rivière-aux-Cerises marsh","Trails and boardwalks over the marsh, easy for kids. Great for birdwatching.","Marais de la Rivière-aux-Cerises"],
+["Summer","Bleu Lavande","Lavender fields in bloom in June and July, with a shop and picnic spots.","Bleu Lavande Fitch Bay"]],
+food:[["Beer and pub","La Memphré microbrewery","Beer brewed on site, relaxed atmosphere.","Microbrasserie La Memphré Magog"],
+["Gastropub","Taverne 1855","Well-made tavern food, right downtown.","Taverne 1855 Magog"],
+["Bistro","Bistro 4 Saisons","Careful French cooking in Orford. Perfect for a special dinner.","Bistro 4 Saisons Orford"],
+["Bistro","Au Comptoir Marcel","Good food and attentive service.","Au Comptoir Marcel Magog"],
+["Italian","Alessa Trattoria","Pizza and pasta, popular with families.","Alessa Trattoria Magog"],
+["Mediterranean","Bistro Kóz","A wide choice of Mediterranean dishes. LeCornet ice cream right next door.","Bistro Koz Magog"]],
+foot:"Enjoy your stay! · Dave and family",photo:"Photo",close:"Close",next:"Next step",again:"Start over",light:"Light it",
+cards:{
+door:{t:"Front door",s:"Locking up",blocks:[
+  {h:"From outside (with the key)",steps:["Close the door.","Lift the handle up. A little pressure is normal.","Turn the key right (clockwise) all the way.","Turn back slightly to remove the key. It's locked!"]},
+  {h:"From inside",steps:["Close the door.","Lift the handle all the way up. This sets the latch.","Turn the small knob left (counterclockwise) all the way.","To check, try opening with the handle."]}],
+  caps:["Outside","Inside"]},
+fire:{t:"Fireplace",s:"Wood and top-down fire",blocks:[
+  {h:"Firewood",steps:["The wood is outside, near the front door.","Bring in a few logs at a time.","Store them in the space under the fireplace."]},
+  {h:"Opening the fireplace door",steps:["Use the metal key (small bar with a hole).","Insert it at the top right of the door and turn slightly.","The door is spring-loaded: hold it open with one hand, that's normal."]},
+  {demo:"fire",h:"Building a top-down fire"},
+  {h:"Keeping it going",steps:["Gently add normal-size logs.","Split logs catch more easily than round ones."]}],
+  tip:"<b>Important:</b> logs go across the width of the fireplace (left to right), never front to back.",
+  caps:["Firewood, outside","The fireplace"],
+  fire:["Big logs at the bottom, one right at the front so nothing rolls toward the door.","Medium logs on top.","Small kindling on top of that.","Light it from the top. The fire works its way down!"]},
+stove:{t:"Stove",s:"Gas burners, electric oven",blocks:[{demo:"stove",h:"Lighting a burner"},
+  {h:"Steps",steps:["The small dots above each knob show which burner it controls.","Push the knob in and slowly turn it left.","A click: that's the auto-igniter, gas is flowing.","Hold that position a few seconds until the flame appears.","Adjust the heat. To turn off, go back to “Off”."]},
+  {h:"Good to know",steps:["The burners run on gas, but the oven is electric.","If the gas runs out, use the electric oven or the induction burner stored in the entrance closet."]}],
+  caps:["The knobs"],stove:["Knob on “Off”.","Push in and turn left…","Click! Gas is flowing. Wait a few seconds.","Flame's on. Adjust the heat."]},
+patio:{t:"Patio doors",s:"Handle turns 180°",blocks:[{demo:"patio",h:"How it slides"},
+  {h:"Opening",steps:["The door must be closed.","Turn the handle 180° down: the door lifts onto its rollers.","Slide the door open."]},
+  {h:"Closing",steps:["Slide the door all the way closed.","Turn the handle back up: the door settles onto the floor."]}],
+  tip:"<b>Important:</b> only slide the door when the handle is down.",
+  caps:["The handle"],patio:[["Closed","Handle up: the door rests on the floor, fully closed."],["Handle down","The door lifts onto its rollers, ready to slide."],["Open","Slide it. Keep the handle down while it's open."]]},
+win:{t:"Windows",s:"Tilt and turn",blocks:[{demo:"win",h:"The 3 positions"},
+  {h:"Good to know",steps:["Only change the handle position when the window is closed.","To close: push the window against the frame, then turn the handle down."]}],
+  tip:"<b>Before leaving:</b> every handle down. It gets very windy here!",
+  caps:["The handle"],win:[["Closed","Handle down: window closed and locked."],["Like a door","Handle sideways: the window swings fully open."],["Airing","Handle up: only the top tilts open."]]},
+heat:{t:"Heating",s:"Already set up",blocks:[{h:"Easy",steps:["Heating and air exchanger run on their own.","Only use the ▲ and ▼ arrows to set the temperature.","Please don't change the other menus."]},
+  {h:"What heats what",steps:["The thermostat in the main hallway controls the whole floor.","Each bathroom has its own heating.","The basement has heated floors."]}],caps:["Hallway thermostat"]}
+}}};
+const IMG={door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
+const ORDER=["door","fire","stove","patio","win","heat"];
+let L="fr";try{L=localStorage.getItem("lang")||"fr"}catch(e){}
+let done={};try{done=JSON.parse(localStorage.getItem("done")||"{}")}catch(e){}
+const $=s=>document.querySelector(s);
+const esc=s=>s;
+
+function render(){
+  const t=T[L];document.documentElement.lang=L;
+  document.querySelectorAll("[data-t]").forEach(el=>{const v=t[el.dataset.t];if(typeof v==="string")el.innerHTML=v});
+  document.querySelectorAll("[data-l]").forEach(el=>el.innerHTML=t[el.dataset.l].map(x=>`<li>${x}</li>`).join(""));
+  $("#facts").innerHTML=t.facts.map(f=>`<span>${f}</span>`).join("");
+  $("#gallery").innerHTML=t.tour.map(([f,h,p])=>`<figure><img src="img/${f}.jpg" alt="${h}" loading="lazy"><figcaption><b>${h}</b>${p}</figcaption></figure>`).join("");
+  $("#grid").innerHTML=ORDER.map(k=>{const c=t.cards[k];return `<button class="fiche" data-k="${k}"><span class="ph" style="background-image:url('${IMG[k][IMG[k].length-1]}')"></span><span class="t"><b>${c.t}</b><small>${c.s}</small></span></button>`}).join("");
+  const pl=a=>a.map(([k,n,d,q])=>`<a class="place" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener"><span class="k">${k}</span><b>${n}</b><span>${d}</span><span class="go">${t.map}</span></a>`).join("");
+  $("#acts").innerHTML=pl(t.acts);$("#food").innerHTML=pl(t.food);
+  $("#check").innerHTML=t.leave.map((x,i)=>`<label><input type="checkbox" id="c${i}" ${done[i]?"checked":""}><span>${x}</span></label>`).join("");
+  prog();
+  $("#fr").setAttribute("aria-pressed",L==="fr");$("#en").setAttribute("aria-pressed",L==="en");
+  document.title=L==="fr"?"Guide de la maison du lac":"Lake House Guide";
+}
+function prog(){const n=T[L].leave.length,d=[...Array(n).keys()].filter(i=>done[i]).length;$("#prog").textContent=T[L].prog(d,n)}
+$("#check").addEventListener("change",e=>{const i=+e.target.id.slice(1);done[i]=e.target.checked;try{localStorage.setItem("done",JSON.stringify(done))}catch(x){}prog()});
+["fr","en"].forEach(l=>$("#"+l).onclick=()=>{L=l;try{localStorage.setItem("lang",l)}catch(e){}render();if(cur&&$("#sheet").open)openSheet(cur)});
+
+let cur=null;
+function openSheet(k){
+  cur=k;const t=T[L],c=t.cards[k];
+  let h=`<div class="sh-top"><h2 id="shT">${c.t}</h2><button class="x" aria-label="${t.close}" onclick="document.getElementById('sheet').close()">×</button></div>`;
+  h+=`<div class="photos">${IMG[k].map((src,i)=>`<figure><img src="${src}" alt="${c.caps[i]||c.t}"><figcaption>${c.caps[i]||""}</figcaption></figure>`).join("")}</div>`;
+  if(c.tip)h+=`<p class="tip">${c.tip}</p>`;
+  c.blocks.forEach(b=>{
+    h+=`<div class="block"><h3>${b.h}</h3>`;
+    if(b.demo)h+=demo(b.demo,c);
+    if(b.steps)h+=`<ol class="steps">${b.steps.map(s=>`<li><span>${s}</span></li>`).join("")}</ol>`;
+    h+=`</div>`});
+  $("#sh").innerHTML=h;wire(k,c);
+  if(!$("#sheet").open)$("#sheet").showModal();
+}
+$("#grid").addEventListener("click",e=>{const b=e.target.closest(".fiche");if(b)openSheet(b.dataset.k)});
+$("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")e.target.close()});
+
+function demo(type,c){
+  const t=T[L];
+  if(type==="win")return `<div class="demo"><div class="stage"><div class="win" id="dw" data-s="closed"><div class="frame"></div><div class="sash"><div class="handle"></div></div></div></div>
+    <div class="seg">${c.win.map((w,i)=>`<button data-i="${i}" aria-pressed="${i===0}">${w[0]}</button>`).join("")}</div><p class="cap" id="dc"><b>${c.win[0][0]}.</b> ${c.win[0][1]}</p></div>`;
+  if(type==="patio")return `<div class="demo"><div class="stage"><div class="patio" id="dp" data-s="closed"><div class="fixed"></div><div class="panel"><div class="ph2"></div><div class="rollers"><i></i><i></i></div></div></div></div>
+    <div class="seg">${c.patio.map((w,i)=>`<button data-i="${i}" aria-pressed="${i===0}">${w[0]}</button>`).join("")}</div><p class="cap" id="dc"><b>${c.patio[0][0]}.</b> ${c.patio[0][1]}</p></div>`;
+  if(type==="fire")return `<div class="demo fire"><div class="stage"><svg viewBox="0 0 220 170" role="img" aria-label="${c.t}">
+      <rect x="6" y="6" width="208" height="158" rx="6" fill="var(--ink)"/><rect x="18" y="18" width="184" height="134" rx="3" fill="var(--paper)" opacity=".12"/>
+      <g class="layer" id="f0"><rect x="30" y="122" width="160" height="24" rx="12" fill="#7a4a2a"/><rect x="34" y="100" width="152" height="22" rx="11" fill="#8b5a33"/><circle cx="42" cy="134" r="9" fill="#d6a46f"/><circle cx="178" cy="111" r="8" fill="#d6a46f"/></g>
+      <g class="layer" id="f1"><rect x="44" y="84" width="132" height="16" rx="8" fill="#a06b3f"/><rect x="52" y="70" width="116" height="15" rx="7" fill="#946238"/></g>
+      <g class="layer" id="f2" stroke="#d9b47c" stroke-width="5" stroke-linecap="round"><path d="M70 66 L150 56 M74 56 L148 66 M86 62 L134 52"/></g>
+      <g class="layer" id="f3"><path class="flame" d="M110 20 C126 38 132 48 124 60 C120 54 116 52 116 52 C118 60 112 66 104 64 C96 62 92 54 98 44 C100 50 104 50 104 50 C100 38 106 30 110 20Z" fill="var(--maple)"/></g>
+    </svg></div><p class="cap" id="dc"></p><div class="seg"><button id="fn">${t.next}</button></div></div>`;
+  if(type==="stove")return `<div class="demo"><div class="stage"><div class="stove" id="ds" data-s="off"><div class="burner">${[30,45,60,75,90,105].map(x=>`<span class="fl" style="left:${x}px"></span>`).join("")}<span class="ring"></span></div><div class="spark">clic !</div><div class="knob"></div></div></div>
+    <p class="cap" id="dc"><b>1.</b> ${c.stove[0]}</p><div class="seg"><button id="sn">${t.light}</button></div></div>`;
+  return "";
+}
+function wire(k,c){
+  const t=T[L];
+  const seg=(id,arr,states)=>{const box=$("#"+id);document.querySelectorAll(".seg [data-i]").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;box.dataset.s=states[i];document.querySelectorAll(".seg [data-i]").forEach(x=>x.setAttribute("aria-pressed",x===b));$("#dc").innerHTML=`<b>${arr[i][0]}.</b> ${arr[i][1]}`})};
+  if(k==="win")seg("dw",c.win,["closed","turn","tilt"]);
+  if(k==="patio")seg("dp",c.patio,["closed","lift","open"]);
+  if(k==="fire"){let n=-1;const step=()=>{n++;if(n>3){n=-1;document.querySelectorAll(".layer").forEach(l=>l.classList.remove("on"));$("#dc").textContent="";$("#fn").textContent=t.next;return}
+      $("#f"+n).classList.add("on");$("#dc").innerHTML=`<b>${n+1}.</b> ${c.fire[n]}`;$("#fn").textContent=n===3?t.again:t.next};$("#fn").onclick=step;step()}
+  if(k==="stove"){const st=["off","push","click","lit"];let n=0,tm=[];$("#sn").onclick=()=>{tm.forEach(clearTimeout);tm=[];const go=i=>{$("#ds").dataset.s=st[i];$("#dc").innerHTML=`<b>${i+1}.</b> ${c.stove[i]}`};
+      if($("#ds").dataset.s==="lit"){go(0);$("#sn").textContent=t.light;return}go(1);tm.push(setTimeout(()=>go(2),1100),setTimeout(()=>{go(3);$("#sn").textContent=t.again},2800))}}
+}
+render();
+if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.querySelectorAll("video.amb").forEach(v=>{v.removeAttribute("autoplay");v.pause()});
+</script>
+</body>
+</html>
