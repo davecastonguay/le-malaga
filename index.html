@@ -61,7 +61,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .gallery figcaption b{color:var(--ink);font-family:var(--display);font-size:1rem;display:block}
 .wide{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px}
 .note.with-img{grid-template-columns:minmax(0,120px) minmax(0,1fr);align-items:start;gap:14px}
+.note a{color:var(--lake);font-weight:700}
 .note.with-img img{border-radius:10px;aspect-ratio:1;object-fit:cover;width:100%}
+@media(max-width:520px){.note.with-img{grid-template-columns:minmax(0,1fr)}.note.with-img img{aspect-ratio:16/9}}
 .intro{display:grid;gap:12px;padding-block:22px 6px}
 .intro h1{font-size:clamp(2rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
 .intro h1 em{font-style:normal;color:var(--maple)}
@@ -237,6 +239,13 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
     <video class="wide amb" src="img/quai.mp4" poster="img/quai-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
     <div class="note eco"><h3 data-t="vestH"></h3><ul class="pts" data-l="vest"></ul></div>
     <div class="note warn"><h3 data-t="windH"></h3><ul class="pts" data-l="wind"></ul></div>
+  </section>
+
+  <section id="dehors">
+    <div class="sec-head"><span class="eyebrow" data-t="outEye"></span><h2 data-t="outH"></h2></div>
+    <div class="note warn with-img"><img src="img/feu-camp.jpg" alt=""><div><h3 data-t="fireOutH"></h3><ul class="pts" data-l="fireOut"></ul></div></div>
+    <div class="note"><h3 data-t="bbqH"></h3><ul class="pts" data-l="bbq"></ul></div>
+    <div class="note eco"><h3 data-t="wasteH"></h3><ul class="pts" data-l="waste"></ul></div>
   </section>
 
   <section>

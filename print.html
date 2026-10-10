@@ -56,6 +56,7 @@ li{margin:1px 0}
 .note.warn h3{color:var(--maple)}
 .note.eco{background:var(--lake-soft);border-color:transparent}
 .note h3{font-size:11.5pt;margin-bottom:4px}
+.note a{color:var(--ink);text-decoration:none;font-weight:700}
 .check li{list-style:none;margin-left:-1.15em;display:flex;gap:8px;align-items:flex-start;padding:2px 0;font-size:10.5pt}
 .check li::before{content:"";flex:none;width:13px;height:13px;border:1.5px solid var(--ink);border-radius:3px;margin-top:3px}
 .urg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
@@ -113,15 +114,16 @@ let H=`<section class="page cover">
 <section><h2 class="sec">${t.howH}</h2>${ORDER.map(card).join("")}</section>
 <section class="page" style="margin-top:14px"><h2 class="sec">${t.lakeH} · ${t.cleanH}</h2>
   <div class="notes">${note("eco","waterH","water")}${note("","pantryH","pantry")}${note("warn","pingH","ping")}${note("eco","vestH","vest")}${note("warn","windH","wind")}${note("eco","ecoH","eco")}</div>
+  <div class="block" style="break-inside:avoid"><h2 class="sec">${t.outH}</h2><div class="notes">${note("warn","fireOutH","fireOut")}${note("","bbqH","bbq")}${note("eco","wasteH","waste")}</div></div>
   <div class="block"><h2 class="sec">${t.cleanEye}</h2>${note("","","clean")}</div>
+  <div class="block" style="break-inside:avoid"><h2 class="sec">${t.leaveH}</h2><ul class="check">${t.leave.map(([,x])=>`<li>${x}</li>`).join("")}</ul></div>
 </section>
-<section><div style="break-inside:avoid"><h2 class="sec">${t.leaveH}</h2><ul class="check">${t.leave.map(([,x])=>`<li>${x}</li>`).join("")}</ul></div>
-  <div class="block"><h2 class="sec">${t.urgH}</h2>
+<section><div><h2 class="sec">${t.urgH}</h2>
   <div class="urg">${t.urg.map(([n,d,,big])=>`<div class="${big?"big":""}"><b>${n}</b>${d.replace(/ ?(Voir sur la carte|See on the map|Ver en el mapa) →/,"")}</div>`).join("")}</div></div>
   <div class="block"><h2 class="sec">${t.soonH}</h2>
   <h3 style="font-size:12pt;margin:4px 0 6px">${t.actH}</h3><div class="places">${t.acts.map(([k,n,d])=>`<div><span class="k">${k}</span><b>${n}</b><span>${d}</span></div>`).join("")}</div>
   <h3 style="font-size:12pt;margin:10px 0 6px">${t.foodH}</h3><div class="places">${t.food.map(([k,n,d])=>`<div><span class="k">${k}</span><b>${n}</b><span>${d}</span></div>`).join("")}</div>
-  <p style="font-size:8.5pt;color:var(--muted);margin-top:4px">${t.aroundNote} · <b>${t.foot}</b></p></div>
+  <p style="font-size:8.5pt;color:var(--muted);margin-top:4px"><b>${t.foot}</b></p></div>
 </section>`;
 document.getElementById("root").innerHTML=H;
 </script>
