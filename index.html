@@ -344,6 +344,7 @@ function openSheet(k){
   let h=`<div class="sh-top"><h2 id="shT">${c.t}</h2><button class="x" aria-label="${t.close}" onclick="document.getElementById('sheet').close()">×</button></div>`;
   h+=`<div class="photos">${IMG[k].map((src,i)=>`<figure><img src="${src}" alt="${c.caps[i]||c.t}"><figcaption>${c.caps[i]||""}</figcaption></figure>`).join("")}</div>`;
   if(c.tip)h+=`<p class="tip">${c.tip}</p>`;
+  if(c.warn)h+=`<p class="tip warn">${c.warn}</p>`;
   if(VID[k])VID[k].forEach(([src,poster],i)=>{const v=c.vids[i];h+=`<div class="block"><h3>${v.h}</h3><div class="vwrap"><video class="howto" data-i="${i}" src="${src}" poster="${poster}" muted loop playsinline preload="metadata" ${still?"controls":"autoplay"}></video><p class="vcap" aria-live="polite">${v.cap[0][1]}</p></div></div>`});
   c.blocks.forEach(b=>{
     h+=`<div class="block"><h3>${b.h}</h3>`;

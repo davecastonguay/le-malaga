@@ -12,7 +12,7 @@ A one-page, mobile-first guide for home-exchange guests staying at Dave's lake h
 - `index.html` – the website: CSS at the top, markup, then the page script.
 - `content.js` – **all guest-facing text**, in the `T` object: `T.fr`, `T.en`, `T.es`. Shared by the website and the printable guide.
   - Every change to text must be made in **every** language. Keys must match across languages.
-  - `T.<lang>.cards` – the how-to cards (door, fire, stove, patio, win, heat, vinyl). Each card has `t` (title), `s` (subtitle), `blocks` (steps), optional `tip`, `caps` (photo captions) and demo data.
+  - `T.<lang>.cards` – the how-to cards (door, fire, stove, patio, win, heat, vinyl). Each card has `t` (title), `s` (subtitle), `blocks` (steps), optional `tip` and `warn` (highlighted notes), `caps` (photo captions) and demo data.
   - `tour` – photo tour: `[file-stem, title, caption]`, image at `img/<file-stem>.jpg`.
   - `acts` / `food` – "Around Magog": `[tag, name, description, Google Maps search query]`.
   - `leave` – the "before you leave" checklist: `[id, text]`. Keep the ids stable (they remember ticked boxes).

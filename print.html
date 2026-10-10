@@ -90,6 +90,7 @@ function card(k){
   const c=t.cards[k];let h=`<div class="card"><div class="ph">${IMG[k].map(s=>`<img src="${s}" alt="">`).join("")}</div><div>`;
   h+=`<img class="qr" src="img/qr/${k}.svg" alt=""><h3>${c.t}<small>${c.s}</small></h3>`;
   if(c.tip)h+=`<p class="tip">${c.tip}</p>`;
+  if(c.warn)h+=`<p class="tip warn">${c.warn}</p>`;
   c.blocks.forEach(b=>{
     h+=`<h4>${b.h}</h4>`;
     if(b.demo==="fire")h+=ol(c.fire);
