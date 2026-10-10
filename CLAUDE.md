@@ -6,17 +6,26 @@ A one-page, mobile-first guide for home-exchange guests staying at Dave's lake h
 - Never commit straight to `main`. Make changes on a branch and open a pull request; Dave merges from his phone.
 - Keep the PR description short and in plain language (Dave is not a developer): what changed for guests, in one or two lines.
 - Before opening the PR, check the page still loads (no JS errors) and each language shows the change.
+- Checklist for every change: text in all 3 languages → rebuild PDFs → bump `VERSION` in `sw.js`.
 
 ## Structure
-- `index.html` – the whole site: CSS at the top, markup, then one `<script>`.
-- All guest-facing text lives in the `T` object in the script: `T.fr`, `T.en` (Spanish `T.es` is planned).
+- `index.html` – the website: CSS at the top, markup, then the page script.
+- `content.js` – **all guest-facing text**, in the `T` object: `T.fr`, `T.en`, `T.es`. Shared by the website and the printable guide.
   - Every change to text must be made in **every** language. Keys must match across languages.
   - `T.<lang>.cards` – the how-to cards (door, fire, stove, patio, win, heat). Each card has `t` (title), `s` (subtitle), `blocks` (steps), optional `tip`, `caps` (photo captions) and demo data.
   - `tour` – photo tour: `[file-stem, title, caption]`, image at `img/<file-stem>.jpg`.
   - `acts` / `food` – "Around Magog": `[tag, name, description, Google Maps search query]`.
-  - `leave` – the "before you leave" checklist.
+  - `leave` – the "before you leave" checklist: `[id, text]`. Keep the ids stable (they remember ticked boxes).
+  - `urg` – emergency tiles: `[title, text, link or "", highlighted 0/1]`.
+  - `pr` – labels used only in the printable guide.
 - `IMG` in the script maps each card to its photos.
 - `img/` – photos (max ~800px, JPEG quality ~72) and short silent MP4 clips (H.264, ~960px wide, no audio).
+- `print.html?lang=fr|en|es` – printable guide (US Letter) built from `content.js`. `qr.html` – sheet of 9 QR stickers.
+- `print/` – the PDFs linked from the site. **Rebuild them after any text change:** `python3 tools/build_print.py` (needs Playwright + Chromium), then commit them.
+- `img/qr/` – QR codes pointing to `https://davecastonguay.github.io/le-malaga/#<card>`. Rebuild with `tools/make_qr.sh` (needs pdflatex + pdftocairo) only if the site address changes.
+- Deep links: `#door`, `#fire`, `#stove`, `#patio`, `#win`, `#heat` open that card; `#partir`, `#urgences` scroll to the section; `?lang=en` forces a language.
+- `sw.js` – offline support. **Bump `VERSION` on every change**, and add any new image to `ASSETS`.
+- `manifest.webmanifest`, `img/icon-*.png` – lets guests add the guide to their home screen.
 - `.nojekyll` – keeps GitHub Pages from processing the files.
 
 ## Content rules
