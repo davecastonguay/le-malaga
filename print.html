@@ -79,8 +79,8 @@ footer{margin-top:8px;text-align:center;color:var(--muted);font-size:9pt}
 const LANGS=["fr","en","es"];
 let L=new URLSearchParams(location.search).get("lang");if(!LANGS.includes(L))L="fr";
 const t=T[L],pr=t.pr,BASE="https://davecastonguay.github.io/le-malaga/";
-const IMG={door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
-const ORDER=["door","fire","stove","patio","win","heat"];
+const IMG={vinyl:["img/vinyle-levier.jpg","img/vinyle-son.jpg"],door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
+const ORDER=["door","fire","stove","patio","win","heat","vinyl"];
 const strip=h=>h.replace(/<\/?em>/g,"");
 const ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join("")}</ul>`;
 const ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join("")}</ol>`;

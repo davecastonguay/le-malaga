@@ -71,7 +71,12 @@ win:{t:"Fenêtres",s:"Oscillo-battantes",blocks:[{demo:"win",h:"Les 3 positions"
   tip:"<b>Avant de partir :</b> toutes les poignées vers le bas. Il vente beaucoup ici !",
   caps:["La poignée"],win:[["Fermée","Poignée vers le bas : fenêtre fermée et verrouillée."],["Comme une porte","Poignée à l'horizontale : la fenêtre s'ouvre complètement."],["Aération","Poignée vers le haut : seul le haut s'ouvre en bascule."]]},
 heat:{t:"Chauffage",s:"Déjà configuré",blocks:[{h:"Simple comme bonjour",steps:["Chauffage et échangeur d'air fonctionnent tout seuls.","Utilisez seulement les flèches ▲ et ▼ pour la température.","Merci de ne pas toucher aux autres menus."]},
-  {h:"Qui chauffe quoi",steps:["Le thermostat du corridor principal contrôle tout l'étage.","Chaque salle de bain a son propre chauffage.","Au sous-sol, c'est un plancher chauffant."]}],caps:["Le thermostat du corridor"]}
+  {h:"Qui chauffe quoi",steps:["Le thermostat du corridor principal contrôle tout l'étage.","Chaque salle de bain a son propre chauffage.","Au sous-sol, c'est un plancher chauffant."]}],caps:["Le thermostat du corridor"]},
+vinyl:{t:"Table tournante",s:"Vinyles et musique",blocks:[
+  {h:"Faire jouer un disque",steps:["Montez le petit levier : le bras se soulève.","Déplacez doucement le bras vers la gauche, au-dessus du disque.","Redescendez le petit levier : le bras se pose et la musique commence."]},
+  {h:"Pour entendre la musique",steps:["Allumez la petite boîte noire : appuyez sur le bouton, une petite lumière bleue s'allume.","Allumez le haut-parleur et mettez-le sur « Aux » (auxiliaire)."]}],
+  tip:"<b>Important :</b> ne forcez jamais le bras. Utilisez toujours le petit levier (voir la vidéo).",
+  caps:["Le petit levier","La boîte noire et le haut-parleur"],vid:"Regardez comment faire"}
 }},
 en:{pr:{wifi:"Wi-Fi network",pass:"Password",phone:"Our number",web:"The web version, with photos and animations:",scan:"Scan with your phone camera",page:"Page",toc:"In this guide",printed:"Printed guide"},brand:"Le Malaga",titleTail:"House guide",click:"click!",where:"Austin · Eastern Townships",hello:"Welcome <em>to the lake</em>",
 introP:"Our family home is a place to slow down. This short guide shows you how everything works. Tap a card to see the steps.",
@@ -144,7 +149,12 @@ win:{t:"Windows",s:"Tilt and turn",blocks:[{demo:"win",h:"The 3 positions"},
   tip:"<b>Before leaving:</b> every handle down. It gets very windy here!",
   caps:["The handle"],win:[["Closed","Handle down: window closed and locked."],["Like a door","Handle sideways: the window swings fully open."],["Airing","Handle up: only the top tilts open."]]},
 heat:{t:"Heating",s:"Already set up",blocks:[{h:"Easy",steps:["Heating and air exchanger run on their own.","Only use the ▲ and ▼ arrows to set the temperature.","Please don't change the other menus."]},
-  {h:"What heats what",steps:["The thermostat in the main hallway controls the whole floor.","Each bathroom has its own heating.","The basement has heated floors."]}],caps:["Hallway thermostat"]}
+  {h:"What heats what",steps:["The thermostat in the main hallway controls the whole floor.","Each bathroom has its own heating.","The basement has heated floors."]}],caps:["Hallway thermostat"]},
+vinyl:{t:"Record player",s:"Vinyl and music",blocks:[
+  {h:"Playing a record",steps:["Raise the small lever: the arm lifts up.","Gently move the arm to the left, over the record.","Lower the small lever: the arm sets down and the music starts."]},
+  {h:"To hear the music",steps:["Turn on the small black box: press the button, a small blue light comes on.","Turn on the speaker and set it to “Aux” (auxiliary)."]}],
+  tip:"<b>Important:</b> never force the arm. Always use the small lever (see the video).",
+  caps:["The small lever","The black box and the speaker"],vid:"Watch how it's done"}
 }},
 es:{pr:{wifi:"Red Wi-Fi",pass:"Contraseña",phone:"Nuestro número",web:"La versión web, con fotos y animaciones:",scan:"Escaneen con la cámara del teléfono",page:"Página",toc:"En esta guía",printed:"Guía impresa"},brand:"Le Malaga",titleTail:"Guía de la casa",click:"¡clic!",where:"Austin · Cantons-de-l'Est (Quebec)",hello:"Bienvenidos <em>a la orilla del lago</em>",
 introP:"Nuestra casa familiar es un lugar para ir más despacio. Esta pequeña guía les muestra cómo funciona todo. Toquen una ficha para ver los pasos.",
@@ -217,6 +227,11 @@ win:{t:"Ventanas",s:"Oscilobatientes",blocks:[{demo:"win",h:"Las 3 posiciones"},
   tip:"<b>Antes de salir:</b> todas las manijas hacia abajo. ¡Aquí hace mucho viento!",
   caps:["La manija"],win:[["Cerrada","Manija hacia abajo: ventana cerrada y asegurada."],["Como una puerta","Manija horizontal: la ventana se abre por completo."],["Ventilación","Manija hacia arriba: solo se inclina la parte de arriba."]]},
 heat:{t:"Calefacción",s:"Ya está configurada",blocks:[{h:"Muy fácil",steps:["La calefacción y el intercambiador de aire funcionan solos.","Usen solo las flechas ▲ y ▼ para la temperatura.","Por favor no toquen los otros menús."]},
-  {h:"Qué calienta qué",steps:["El termostato del pasillo principal controla todo el piso.","Cada baño tiene su propia calefacción.","En el sótano hay piso radiante."]}],caps:["Termostato del pasillo"]}
+  {h:"Qué calienta qué",steps:["El termostato del pasillo principal controla todo el piso.","Cada baño tiene su propia calefacción.","En el sótano hay piso radiante."]}],caps:["Termostato del pasillo"]},
+vinyl:{t:"Tocadiscos",s:"Vinilos y música",blocks:[
+  {h:"Poner un disco",steps:["Suban la palanquita: el brazo se levanta.","Muevan el brazo con cuidado hacia la izquierda, sobre el disco.","Bajen la palanquita: el brazo se apoya y empieza la música."]},
+  {h:"Para escuchar la música",steps:["Enciendan la cajita negra: presionen el botón, se enciende una lucecita azul.","Enciendan el altavoz y pónganlo en « Aux » (auxiliar)."]}],
+  tip:"<b>Importante:</b> nunca fuercen el brazo. Usen siempre la palanquita (vean el video).",
+  caps:["La palanquita","La cajita negra y el altavoz"],vid:"Miren cómo se hace"}
 }},
 };

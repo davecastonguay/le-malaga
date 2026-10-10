@@ -125,6 +125,7 @@ dialog::backdrop{background:rgb(0 0 0 / .45)}
 ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:8px}
 ol.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
 ol.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--lake);color:var(--paper);font-weight:700;font-size:.85rem;display:grid;place-items:center}
+video.howto{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:var(--ink)}
 .tip{font-size:.92rem;padding:10px 12px;border-radius:10px;background:var(--maple-soft)}
 .tip b{color:var(--maple)}
 
@@ -290,8 +291,9 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
 
 <script src="content.js"></script>
 <script>
-const IMG={door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
-const ORDER=["door","fire","stove","patio","win","heat"];
+const VID={vinyl:["img/vinyle.mp4","img/vinyle-poster.jpg"]};
+const IMG={vinyl:["img/vinyle-levier.jpg","img/vinyle-son.jpg"],door:["img/porte-ext.jpg","img/porte-int.jpg"],fire:["img/bois.jpg","img/foyer.jpg"],stove:["img/cuisiniere.jpg"],patio:["img/patio.jpg"],win:["img/fenetre.jpg"],heat:["img/thermostat.jpg"]};
+const ORDER=["door","fire","stove","patio","win","heat","vinyl"];
 const LANGS=["fr","en","es"];let L=(navigator.language||"fr").slice(0,2);try{L=localStorage.getItem("lang")||L}catch(e){}
 if(!LANGS.includes(L))L="fr";
 const q=new URLSearchParams(location.search).get("lang");if(LANGS.includes(q))L=q;
@@ -324,6 +326,7 @@ function openSheet(k){
   let h=`<div class="sh-top"><h2 id="shT">${c.t}</h2><button class="x" aria-label="${t.close}" onclick="document.getElementById('sheet').close()">×</button></div>`;
   h+=`<div class="photos">${IMG[k].map((src,i)=>`<figure><img src="${src}" alt="${c.caps[i]||c.t}"><figcaption>${c.caps[i]||""}</figcaption></figure>`).join("")}</div>`;
   if(c.tip)h+=`<p class="tip">${c.tip}</p>`;
+  if(VID[k])h+=`<div class="block"><h3>${c.vid}</h3><video class="howto" src="${VID[k][0]}" poster="${VID[k][1]}" controls muted playsinline preload="metadata"></video></div>`;
   c.blocks.forEach(b=>{
     h+=`<div class="block"><h3>${b.h}</h3>`;
     if(b.demo)h+=demo(b.demo,c);
