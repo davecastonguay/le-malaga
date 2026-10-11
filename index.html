@@ -69,6 +69,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wide{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px}
 .note.with-img{grid-template-columns:minmax(0,120px) minmax(0,1fr);align-items:start;gap:14px}
 .note a{color:var(--lake);font-weight:700}
+.cut{margin:0;display:grid;gap:4px}
+.cut svg{width:100%;height:auto;display:block}
+.cut .lbl{font-size:10px;fill:var(--ink);stroke:var(--card);stroke-width:3px;paint-order:stroke;stroke-linejoin:round}
+.cut .lbl.b{font-size:11px;font-weight:700}
+.cut figcaption{font-size:.8rem;color:var(--muted)}
 .note.with-img img,.note.with-img video{display:block;border-radius:10px;aspect-ratio:1;object-fit:cover;width:100%}
 @media(max-width:520px){.note.with-img{grid-template-columns:minmax(0,1fr)}.note.with-img img,.note.with-img video{aspect-ratio:16/9}}
 .intro{display:grid;gap:12px;padding-block:22px 6px}
@@ -258,6 +263,7 @@ footer{margin-top:44px;color:var(--muted);font-size:.85rem;text-align:center}
     <div class="sec-head"><span class="eyebrow" data-t="lakeEye"></span><h2 data-t="lakeH"></h2></div>
     <video class="wide amb" src="img/quai.mp4" poster="img/quai-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
     <div class="note eco"><h3 data-t="vestH"></h3><ul class="pts" data-l="vest"></ul></div>
+    <div class="note lakefacts"><h3 data-t="lakeFactsH"></h3><figure class="cut" id="cut"></figure><ul class="pts" data-l="lakeFacts"></ul></div>
   </section>
 
   <section id="dehors">
@@ -318,11 +324,34 @@ let done={};try{done=JSON.parse(localStorage.getItem("done2")||"{}")}catch(e){}
 const $=s=>document.querySelector(s);
 const esc=s=>s;
 
+// Schematic cross-section of Lac Malaga, drawn to scale vertically (1 m = Y px). Figures from the 2025 lake portrait.
+function lakeCut(c){
+  const W=340,top=34,Y=17,d=m=>top+m*Y,bot=d(8.5);
+  const bed=`M0 ${top} C40 ${d(1)} 60 ${d(3.5)} 95 ${d(6.2)} S135 ${bot} 150 ${d(8)} S175 ${d(4.6)} 195 ${d(5)} S240 ${d(8.6)} 255 ${d(7.6)} S300 ${d(2)} ${W-40} ${top}`;
+  const tick=[0,2,4,6,8].map(m=>`<line x1="${W-34}" x2="${W-28}" y1="${d(m)}" y2="${d(m)}" stroke="var(--muted)"/><text x="${W-24}" y="${d(m)+4}" font-size="10" fill="var(--muted)">${m} m</text>`).join("");
+  return `<svg viewBox="0 0 ${W} ${bot+22}" role="img" aria-label="${c.t}">
+  <rect x="0" y="${d(4)}" width="${W-40}" height="${2*Y}" fill="var(--lake)" opacity=".12"/>
+  <path d="${bed} L${W-40} ${top} Z" fill="var(--water)" opacity=".55"/>
+  <path d="${bed} L${W-40} ${bot+22} L0 ${bot+22} Z" fill="var(--hill1)" opacity=".85"/>
+  <line x1="0" x2="${W-40}" y1="${top}" y2="${top}" stroke="var(--lake)" stroke-width="2"/>
+  <line x1="0" x2="${W-40}" y1="${d(3.8)}" y2="${d(3.8)}" stroke="var(--ink)" stroke-dasharray="4 4" opacity=".7"/>
+  <text class="lbl" x="100" y="${d(3.8)-5}">${c.mean}</text>
+  <line x1="245" x2="245" y1="${top+3}" y2="${d(4.7)}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="2 3"/>
+  <circle cx="245" cy="${d(4.7)}" r="4.5" fill="var(--card)" stroke="var(--ink)" stroke-width="1.5"/>
+  <text class="lbl" x="${W-44}" y="${top+14}" text-anchor="end">${c.secchi}</text>
+  <text class="lbl" x="150" y="${d(5.6)}" text-anchor="middle">${c.thermo}</text>
+  <text class="lbl b" x="150" y="${bot+15}" text-anchor="middle">▼ ${c.max}</text>
+  <g transform="translate(70 ${top-30.6})"><circle cx="0" cy="3.5" r="3.5" fill="var(--maple)"/><rect x="-3" y="7.5" width="6" height="13" rx="3" fill="var(--maple)"/><rect x="-3" y="19" width="6" height="11.6" rx="2" fill="var(--maple)" opacity=".8"/></g>
+  <text class="lbl" x="80" y="${top-14}">${c.you}</text>
+  ${tick}
+</svg><figcaption>${c.t}</figcaption>`;
+}
 function render(){
   const t=T[L];document.documentElement.lang=L;
   document.querySelectorAll("[data-t]").forEach(el=>{const v=t[el.dataset.t];if(typeof v==="string")el.innerHTML=v});
   document.querySelectorAll("[data-l]").forEach(el=>el.innerHTML=t[el.dataset.l].map(x=>`<li>${x}</li>`).join(""));
   $("#jump").setAttribute("aria-label",t.navLabel);$("#jl").innerHTML=t.nav.filter(([id])=>id!=="urgences").map(([id,x])=>`<a href="#${id}">${x}</a>`).join("");$("#sos").textContent=t.nav.find(([id])=>id==="urgences")[1];
+  $("#cut").innerHTML=lakeCut(t.lakeCut);
   $("#facts").innerHTML=t.facts.map(f=>`<span>${f}</span>`).join("");
   $("#gallery").innerHTML=t.tour.map(([f,h,p])=>`<figure><img src="img/${f}.jpg" alt="${h}" loading="lazy"><figcaption><b>${h}</b>${p}</figcaption></figure>`).join("");
   $("#grid").innerHTML=ORDER.map(k=>{const c=t.cards[k];return `<button class="fiche" data-k="${k}"><span class="ph" style="background-image:url('${TILE[k]||IMG[k][IMG[k].length-1]}')"></span><span class="t"><b>${c.t}</b><small>${c.s}</small></span></button>`}).join("");
