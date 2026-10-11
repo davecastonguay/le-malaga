@@ -18,6 +18,7 @@ A one-page, mobile-first guide for home-exchange guests staying at Dave's lake h
   - `leave` – the "before you leave" checklist: `[id, text]`. Keep the ids stable (they remember ticked boxes).
   - `urg` – emergency tiles: `[title, text, link or "", highlighted 0/1]`.
   - `pr` – labels used only in the printable guide.
+  - `lakeFacts` / `lakeCut` – lake numbers (source: 2025 "Portrait du lac Malaga") and labels for the `lakeCut()` cross-section diagram in index.html.
 - `IMG` in the script maps each card to its photos; `VID` adds optional how-to videos (a list of `[mp4, poster]`); each needs a matching entry in the card's `vids` in content.js: `{h: heading, cap: [[seconds, caption], ...]}`. Videos have no sound; the timed captions replace the voice.
 - `img/` – photos (max ~800px, JPEG quality ~72) and short silent MP4 clips (H.264, ~960px wide, no audio).
 - `print.html?lang=fr|en|es` – printable guide (US Letter) built from `content.js`. `qr.html` – sheet of 10 QR stickers.
