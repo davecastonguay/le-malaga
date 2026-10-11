@@ -1,7 +1,7 @@
 // Offline support. Bump VERSION whenever any file changes, so guests get the update.
 // Keep ASSETS in sync with the files the page uses (videos are left out on purpose:
 // they stream from the network and show their poster image when offline).
-const VERSION = "malaga-v10";
+const VERSION = "malaga-v11";
 const ASSETS = [
   "./",
   "./index.html",
@@ -39,6 +39,7 @@ const ASSETS = [
   "./img/vinyle-poster.jpg",
   "./img/foyer-ouvrir-poster.jpg",
   "./img/foyer-pendant-poster.jpg",
+  "./img/plancha.jpg",
 ];
 
 self.addEventListener("install", e => {
